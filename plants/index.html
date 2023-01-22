@@ -10,7 +10,6 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inika:wght@400;700&family=Inter:wght@400;700&display=swap" rel="stylesheet">
-    <script src="js/script.js"></script>
 </head>
 <body>
    <header>
@@ -21,21 +20,31 @@
                     Plants
                 </div>
             </div>
-            <nav class="header__nav">
-                <ul>
-                    <li><a class="link-nav" href="#welcome">Home</a></li>
-                    <li><a class="link-nav" href="#about">About us</a></li>
-                    <li><a class="link-nav" href="#service">Service</a></li>
-                    <li><a class="link-nav" href="#prices">Price</a></li>
-                    <li><a class="link-nav" href="#contacts">Contacts</a></li>
-                </ul>            
-            </nav>
+            <div class="header__nav">
+                <nav>
+                    <ul>
+                        <li><a class="link-nav" href="#welcome">Home</a></li>
+                        <li><a class="link-nav" href="#about">About us</a></li>
+                        <li><a class="link-nav" href="#service">Service</a></li>
+                        <li><a class="link-nav" href="#prices">Price</a></li>
+                        <li><a class="link-nav" href="#contacts">Contacts</a></li>
+                    </ul>           
+                </nav> 
+            </div>
+            <div class="header__menu-btn">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
         </div>
    </header>
    <main>
-        <section class="section-welcome" id="welcome">
+        <section class="section-welcome page__section_1" id="welcome">
             <div class="section-welcome__wrapper wrapper">
-                <img src="img/leafs.png" alt="leafs">
+                <div class="section-welcome__img">
+                    <img src="img/leafs.png" alt="leafs">
+                </div> 
                 <div class="section-welcome__info">
                     <h1 class="section-welcome__title">
                         We grow <span>plants</span> and give you oxygen
@@ -50,7 +59,7 @@
                 </div>
             </div>
         </section>
-        <section class="section-about" id="about">
+        <section class="section-about page__section_2" id="about">
             <div class="section-about-wrapper wrapper">
                 <div class="section-about__info">
                     <h2 class="section-about__title title">
@@ -62,10 +71,12 @@
                         but also the leap into electronic typesetting, remaining essentially unchanged. 
                     </div>
                 </div>
-                <img src="img/houseplant1.png" alt="plant-1">
+                <div class="section-about__img">
+                    <img src="img/houseplant1.png" alt="plant-1">
+                </div>
             </div>
         </section>
-        <section class="section-service" id="service">
+        <section class="section-service page__section_3" id="service">
             <div class="section-service__wrapper wrapper">
                 <div class="section-service__header">
                     <h2 class="section-service__title title">
@@ -80,54 +91,64 @@
                 <div class="section-service__main">
                     <div class="section-service__cards">
                         <div class="section-service__card">
-                            <img src="img/first.jpg" alt="Garden-care">
-                            <h3 class="card__title">Garden care</h3>
-                            <div class="card__text">
-                                Lorem Ipsum has been the industry
+                            <div class="section-service__card-item">
+                                <img src="img/first.jpg" alt="Garden-care">
+                                <h3 class="card__title">Garden care</h3>
+                                <div class="card__text">
+                                    Lorem Ipsum has been the industry
+                                </div>
                             </div>
                         </div>
                         <div class="section-service__card">
-                            <img src="img/second.jpg" alt="Planting">
-                            <h3 class="card__title">Planting</h3>
-                            <div class="card__text">
-                                Lorem Ipsum has been the industry
+                            <div class="section-service__card-item">
+                                <img src="img/second.jpg" alt="Planting">
+                                <h3 class="card__title">Planting</h3>
+                                <div class="card__text">
+                                    Lorem Ipsum has been the industry
+                                </div>
                             </div>
                         </div>
                         <div class="section-service__card">
-                            <img src="img/third.jpg" alt="Planting">
-                            <h3 class="card__title">Lawn care</h3>
-                            <div class="card__text">
-                                Lorem Ipsum has been the industry
-                            </div>
-                        </div>
-                    </div>
-                    <div class="section-service__cards two">
-                        <div class="section-service__card">
-                            <img src="img/four.jpg" alt="Garden-care">
-                            <h3 class="card__title">Planting</h3>
-                            <div class="card__text">
-                                Lorem Ipsum has been the industry
+                            <div class="section-service__card-item">
+                                <img src="img/third.jpg" alt="Planting">
+                                <h3 class="card__title">Lawn care</h3>
+                                <div class="card__text">
+                                    Lorem Ipsum has been the industry
+                                </div>
                             </div>
                         </div>
                         <div class="section-service__card">
-                            <img src="img/fifth.jpg" alt="Planting">
-                            <h3 class="card__title">Garden care</h3>
-                            <div class="card__text">
-                                Lorem Ipsum has been the industry
+                            <div class="section-service__card-item">
+                                <img src="img/four.jpg" alt="Garden-care">
+                                <h3 class="card__title">Planting</h3>
+                                <div class="card__text">
+                                    Lorem Ipsum has been the industry
+                                </div>
                             </div>
                         </div>
                         <div class="section-service__card">
-                            <img src="img/six.jpg" alt="Planting">
-                            <h3 class="card__title">Planting</h3>
-                            <div class="card__text">
-                                Lorem Ipsum has been the industry
+                            <div class="section-service__card-item">
+                                <img src="img/fifth.jpg" alt="Planting">
+                                <h3 class="card__title">Garden care</h3>
+                                <div class="card__text">
+                                    Lorem Ipsum has been the industry
+                                </div>
+                            </div>
+                        </div>
+                        <div class="section-service__card">
+                            <div class="section-service__card-item">
+                                <img src="img/six.jpg" alt="Planting">
+                                <h3 class="card__title">Planting</h3>
+                                <div class="card__text">
+                                    Lorem Ipsum has been the industry
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
-        <section class="section-prices" id="prices">
+        <section class="section-prices page__section_4" id="prices">
             <div class="section-prices__wrapper wrapper">
                 <div class="section-prices__left">
                     <h2 class="section-prices__title">
@@ -166,13 +187,13 @@
                 </div>
             </div>
         </section>
-        <section class="section-contacts" id="contacts">
+        <section class="section-contacts page__section_5" id="contacts">
             <div class="section-contacts__wrapper wrapper">
-                <div class="section-contacts-left">
-                    <img src="img/contact_woman1.png" alt="contact-woman">
-                </div>
+                <h2 class="title">Contact us</h2> 
                 <div class="section-contacts__info">
-                    <h2 class="title">Contact us</h2>
+                    <div class="section-contacts-img">
+                        <img src="img/contact_woman1.png" alt="contact-woman">
+                    </div>
                     <div class="list">
                         <div class="list-title">
                             City
@@ -208,5 +229,7 @@
         </div>
     </div>
    </footer>
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+   <script src="js/script.js"></script>
 </body>
 </html> 
