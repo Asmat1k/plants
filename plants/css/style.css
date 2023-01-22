@@ -437,7 +437,7 @@ main {
               width: 16px;
               height: 16px;
               border-radius: 50%;
-              background: url("/img/Larrow.png") #D9D9D9 center no-repeat; }
+              background: url("plants/img/Larrow.png") #D9D9D9 center no-repeat; }
       main .section-prices .section-prices__wrapper .section-prices__right {
         display: -webkit-box;
         display: -ms-flexbox;
@@ -547,7 +547,7 @@ main {
             width: 16px;
             height: 16px;
             border-radius: 50%;
-            background: url("/img/LarrowWhite.png") #AEA1A1 center no-repeat; }
+            background: url("plants/img/LarrowWhite.png") #AEA1A1 center no-repeat; }
 
 .link-footer {
   color: black; }
