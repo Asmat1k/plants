@@ -437,7 +437,7 @@ main {
               width: 16px;
               height: 16px;
               border-radius: 50%;
-              background: url("../img/Larrow.png") #D9D9D9 center no-repeat; }
+              background: url("./img/Larrow.png") #D9D9D9 center no-repeat; }
       main .section-prices .section-prices__wrapper .section-prices__right {
         display: -webkit-box;
         display: -ms-flexbox;
@@ -547,7 +547,7 @@ main {
             width: 16px;
             height: 16px;
             border-radius: 50%;
-            background: url("../img/LarrowWhite.png") #AEA1A1 center no-repeat; }
+            background: url("./img/LarrowWhite.png") #AEA1A1 center no-repeat; }
 
 .link-footer {
   color: black; }
@@ -1112,7 +1112,7 @@ footer {
       -ms-flex-align: center;
       align-items: center; }
       main .section-contacts .section-contacts__wrapper .section-contacts__info .list {
-        max-width: 350px;
+        max-width: 348px;
         margin: 80px auto;
         margin-bottom: 132px; }
         main .section-contacts .section-contacts__wrapper .section-contacts__info .list .list-title::after {
