@@ -173,6 +173,20 @@ header {
 .lock {
   overflow: hidden; }
 
+.blured {
+  -webkit-filter: blur(2px);
+  filter: blur(2px); }
+
+.transition {
+  -webkit-transition: 1s;
+  -o-transition: 1s;
+  transition: 1s; }
+
+.transition-fast {
+  -webkit-transition: .5s;
+  -o-transition: .5s;
+  transition: .5s; }
+
 .title {
   font-weight: 400;
   font-size: 40px;
@@ -210,15 +224,33 @@ header {
   font-weight: 400;
   font-size: 20px;
   line-height: 26px; }
+  .but-orange:hover {
+    -webkit-transition: all 2s;
+    -o-transition: all 2s;
+    transition: all 2s;
+    background-color: #E06734;
+    color: white;
+    -webkit-box-shadow: 4px 4px 8px rgba(0, 125, 0, 0.25);
+    box-shadow: 4px 4px 8px rgba(0, 125, 0, 0.25); }
 
-.but-orange:hover {
-  -webkit-transition: all .8s;
-  -o-transition: all .8s;
-  transition: all .8s;
+.service-cards__button {
+  padding: 12px 40px;
+  border: 1px solid #E06733;
+  border-radius: 5px;
+  background-color: #EDF2EC;
+  color: #E06733;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 26px; }
+  .service-cards__button:hover {
+    background-color: #E06734;
+    color: white;
+    -webkit-box-shadow: 4px 4px 8px rgba(0, 125, 0, 0.25);
+    box-shadow: 4px 4px 8px rgba(0, 125, 0, 0.25); }
+
+.active-button {
   background-color: #E06733;
-  color: white;
-  -webkit-box-shadow: 4px 4px 8px rgba(0, 125, 0, 0.25);
-  box-shadow: 4px 4px 8px rgba(0, 125, 0, 0.25); }
+  color: white; }
 
 .but-list:hover {
   -webkit-transition: all 1s;
@@ -325,16 +357,12 @@ main {
         -webkit-box-align: center;
         -ms-flex-align: center;
         align-items: center; }
-        main .section-service .section-service__wrapper .section-service__header .section-service__buttons button {
+        main .section-service .section-service__wrapper .section-service__header .section-service__buttons .service-cards__button {
           margin-right: 38px;
-          background-color: #EDF2EC;
           min-height: 49px;
           min-width: 161px; }
-          main .section-service .section-service__wrapper .section-service__header .section-service__buttons button:last-child {
+          main .section-service .section-service__wrapper .section-service__header .section-service__buttons .service-cards__button:last-child {
             margin: 0; }
-          main .section-service .section-service__wrapper .section-service__header .section-service__buttons button:hover {
-            background-color: #E06733;
-            color: white; }
     main .section-service .section-service__wrapper .section-service__main {
       max-width: 1220px;
       width: 100%;
