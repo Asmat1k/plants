@@ -83,14 +83,14 @@
                         Service and our projects
                     </h2>
                     <div class="section-service__buttons">
-                        <button class="but-orange">Gardens</button>
-                        <button class="but-orange">Lawn</button>
-                        <button class="but-orange">Planting</button>
+                        <button class="service-cards__button cards__button-garden transition-fast">Gardens</button>
+                        <button class="service-cards__button cards__button-lawn transition-fast">Lawn</button>
+                        <button class="service-cards__button cards__button-planting transition-fast">Planting</button>
                     </div>
                 </div>
                 <div class="section-service__main">
                     <div class="section-service__cards">
-                        <div class="section-service__card">
+                        <div class="section-service__card garden transition">
                             <div class="section-service__card-item">
                                 <img src="img/first.jpg" alt="Garden-care">
                                 <h3 class="card__title">Garden care</h3>
@@ -99,7 +99,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="section-service__card">
+                        <div class="section-service__card planting transition">
                             <div class="section-service__card-item">
                                 <img src="img/second.jpg" alt="Planting">
                                 <h3 class="card__title">Planting</h3>
@@ -108,7 +108,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="section-service__card">
+                        <div class="section-service__card lawn transition">
                             <div class="section-service__card-item">
                                 <img src="img/third.jpg" alt="Planting">
                                 <h3 class="card__title">Lawn care</h3>
@@ -117,7 +117,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="section-service__card">
+                        <div class="section-service__card planting transition">
                             <div class="section-service__card-item">
                                 <img src="img/four.jpg" alt="Garden-care">
                                 <h3 class="card__title">Planting</h3>
@@ -126,7 +126,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="section-service__card">
+                        <div class="section-service__card garden transition">
                             <div class="section-service__card-item">
                                 <img src="img/fifth.jpg" alt="Planting">
                                 <h3 class="card__title">Garden care</h3>
@@ -135,7 +135,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="section-service__card">
+                        <div class="section-service__card planting transition">
                             <div class="section-service__card-item">
                                 <img src="img/six.jpg" alt="Planting">
                                 <h3 class="card__title">Planting</h3>
@@ -148,7 +148,6 @@
                 </div>
             </div>
         </section>
-        
         <section class="section-prices" id="prices">
             <div class="section-prices__wrapper wrapper">
                 <div class="section-prices__left">
@@ -195,11 +194,29 @@
                     <div class="section-contacts-img">
                         <img src="img/contact_woman1.png" alt="contact-woman">
                     </div>
-                    <div class="list">
-                        <div class="list-title">
-                            City
+                    <div class="list-collapsible">
+                        <div class="list-main">
+                            <div class="list-title">
+                                City
+                            </div>
                         </div>
-                    </div>
+                        <div class="list-content">
+                            <ul>
+                                <li>Canandaigua, NY</li>
+                                <li>New York City</li>
+                                <li>Yonkers, NY</li>
+                                <li>Sherrill, NY</li>
+                            </ul>
+                        </div>
+                        <div class="section-contacts__card">
+                            <div class="card__info">
+                                <div>Сity:<span class="card-city"></span></div>
+                                <div>Phone:<span class="card-phone"></span></div>
+                                <div class="last"><div class="last-title">Office adress:</div><span class="card-adress"></span></div>
+                                <button class="card-but">Call us</button>
+                            </div>
+                        </div>
+                    </div>  
                 </div>
             </div>
         </section>
