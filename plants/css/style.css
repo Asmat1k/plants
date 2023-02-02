@@ -1518,13 +1518,9 @@ footer {
                   text-align: left; }
                   main .section-prices .section-prices__wrapper .section-prices__left .section-prices__item .section-prices-item__wrapper .list__wrapper .list .section-prices__content .content-text {
                     max-width: 139px; }
-                  main .section-prices .section-prices__wrapper .section-prices__left .section-prices__item .section-prices-item__wrapper .list__wrapper .list .section-prices__content ::after {
-                    content: '';
-                    position: absolute;
+                  main .section-prices .section-prices__wrapper .section-prices__left .section-prices__item .section-prices-item__wrapper .list__wrapper .list .section-prices__content::after {
                     left: 30px;
-                    top: 45px;
-                    border: 1px solid #AEA1A1;
-                    width: 100px; }
+                    max-width: 100px; }
                 main .section-prices .section-prices__wrapper .section-prices__left .section-prices__item .section-prices-item__wrapper .list__wrapper .list:nth-child(1) {
                   margin-top: -1px; }
                 main .section-prices .section-prices__wrapper .section-prices__left .section-prices__item .section-prices-item__wrapper .list__wrapper .list::after {
