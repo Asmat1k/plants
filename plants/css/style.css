@@ -187,10 +187,10 @@ header {
   -o-transition: .5s;
   transition: .5s; }
 
-.active-list {
-  margin-left: -22px;
-  padding-left: 22px;
-  background-color: #C1E698; }
+.active-price {
+  min-height: 118px;
+  display: block;
+  background-color: #D6E7D2; }
 
 .active-after {
   display: -webkit-box;
@@ -203,6 +203,7 @@ header {
   color: #717171; }
   .active-after::after {
     content: '';
+    cursor: pointer;
     position: absolute;
     top: 17px;
     right: 33px;
@@ -278,13 +279,6 @@ header {
 .active-button {
   background-color: #E06733;
   color: white; }
-
-.but-list:hover {
-  -webkit-transition: all 1s;
-  -o-transition: all 1s;
-  transition: all 1s;
-  -webkit-box-shadow: 4px 4px 8px rgba(0, 125, 0, 0.25);
-  box-shadow: 4px 4px 8px rgba(0, 125, 0, 0.25); }
 
 .two {
   margin-top: 55px; }
@@ -463,36 +457,113 @@ main {
         border-radius: 20px; }
         main .section-prices .section-prices__wrapper .section-prices__left .section-prices__item .section-prices-item__wrapper {
           padding: 34px 41px; }
-          main .section-prices .section-prices__wrapper .section-prices__left .section-prices__item .section-prices-item__wrapper .list {
-            cursor: pointer;
-            position: relative;
-            width: 250px;
-            height: 50px;
+          main .section-prices .section-prices__wrapper .section-prices__left .section-prices__item .section-prices-item__wrapper .list__wrapper {
+            margin-bottom: 32px;
+            min-width: 250px;
+            min-height: 50px;
+            background: #EDF2EC;
+            border-radius: 20px; }
+            main .section-prices .section-prices__wrapper .section-prices__left .section-prices__item .section-prices-item__wrapper .list__wrapper:hover {
+              background-color: #d6e7d2;
+              -webkit-transition: .4s ease-out;
+              -o-transition: .4s ease-out;
+              transition: .4s ease-out; }
+            main .section-prices .section-prices__wrapper .section-prices__left .section-prices__item .section-prices-item__wrapper .list__wrapper .list {
+              display: -webkit-box;
+              display: -ms-flexbox;
+              display: flex;
+              -webkit-box-orient: vertical;
+              -webkit-box-direction: normal;
+              -ms-flex-direction: column;
+              flex-direction: column;
+              position: relative; }
+              main .section-prices .section-prices__wrapper .section-prices__left .section-prices__item .section-prices-item__wrapper .list__wrapper .list .section-prices__text {
+                font-weight: 700;
+                font-size: 20px;
+                line-height: 20px;
+                padding: 16px 0 0 40px; }
+                main .section-prices .section-prices__wrapper .section-prices__left .section-prices__item .section-prices-item__wrapper .list__wrapper .list .section-prices__text::after {
+                  content: '';
+                  cursor: pointer;
+                  position: absolute;
+                  top: 18px;
+                  right: 39px;
+                  width: 16px;
+                  height: 16px;
+                  border-radius: 50%;
+                  background: url("../img/Larrow.png") #D9D9D9 center no-repeat; }
+              main .section-prices .section-prices__wrapper .section-prices__left .section-prices__item .section-prices-item__wrapper .list__wrapper .list .section-prices__content {
+                display: none;
+                padding: 15px 40px 12px 40px;
+                max-width: 250px;
+                max-height: 0px;
+                background: #EDF2EC;
+                border-radius: 20px;
+                overflow: hidden;
+                -webkit-transition: max-height 0.5s ease-out;
+                -o-transition: max-height 0.5s ease-out;
+                transition: max-height 0.5s ease-out; }
+                main .section-prices .section-prices__wrapper .section-prices__left .section-prices__item .section-prices-item__wrapper .list__wrapper .list .section-prices__content .content-text {
+                  max-width: 169px;
+                  font-weight: 300;
+                  font-size: 10px;
+                  line-height: 10px;
+                  color: #717171; }
+                main .section-prices .section-prices__wrapper .section-prices__left .section-prices__item .section-prices-item__wrapper .list__wrapper .list .section-prices__content .content-price {
+                  margin: 6px 0 12px 0;
+                  font-weight: 700;
+                  font-size: 12px;
+                  line-height: 20px; }
+                  main .section-prices .section-prices__wrapper .section-prices__left .section-prices__item .section-prices-item__wrapper .list__wrapper .list .section-prices__content .content-price .value {
+                    font-size: 12px;
+                    color: #E06733; }
+                  main .section-prices .section-prices__wrapper .section-prices__left .section-prices__item .section-prices-item__wrapper .list__wrapper .list .section-prices__content .content-price .price {
+                    font-size: 16px;
+                    color: #E06733; }
+                main .section-prices .section-prices__wrapper .section-prices__left .section-prices__item .section-prices-item__wrapper .list__wrapper .list .section-prices__content .content-button {
+                  max-width: 86px;
+                  max-height: 25px;
+                  border-radius: 20px;
+                  padding: 3px 20px;
+                  font-weight: 700;
+                  font-size: 14px;
+                  line-height: 20px;
+                  color: #717171;
+                  background-color: white; }
+                  main .section-prices .section-prices__wrapper .section-prices__left .section-prices__item .section-prices-item__wrapper .list__wrapper .list .section-prices__content .content-button:hover {
+                    background-color: #7a7a7a;
+                    color: white;
+                    -webkit-transition: .4s ease-out;
+                    -o-transition: .4s ease-out;
+                    transition: .4s ease-out; }
+                main .section-prices .section-prices__wrapper .section-prices__left .section-prices__item .section-prices-item__wrapper .list__wrapper .list .section-prices__content::after {
+                  content: '';
+                  position: absolute;
+                  left: 40px;
+                  top: 45px;
+                  border: 0.5px solid #AEA1A1;
+                  width: 165px; }
+            main .section-prices .section-prices__wrapper .section-prices__left .section-prices__item .section-prices-item__wrapper .list__wrapper:last-child {
+              margin-bottom: 0; }
+          main .section-prices .section-prices__wrapper .section-prices__left .section-prices__item .section-prices-item__wrapper .active-price .active-list {
             display: -webkit-box;
             display: -ms-flexbox;
             display: flex;
-            -webkit-box-align: center;
-            -ms-flex-align: center;
-            align-items: center;
-            background: #EDF2EC;
-            border-radius: 20px;
-            margin-bottom: 32px; }
-            main .section-prices .section-prices__wrapper .section-prices__left .section-prices__item .section-prices-item__wrapper .list:last-child {
-              margin-bottom: 0; }
-            main .section-prices .section-prices__wrapper .section-prices__left .section-prices__item .section-prices-item__wrapper .list .section-prices__text {
-              padding-left: 40px;
-              font-weight: 700;
-              font-size: 20px;
-              line-height: 20px; }
-            main .section-prices .section-prices__wrapper .section-prices__left .section-prices__item .section-prices-item__wrapper .list::after {
+            -webkit-box-orient: vertical;
+            -webkit-box-direction: normal;
+            -ms-flex-direction: column;
+            flex-direction: column;
+            position: relative; }
+            main .section-prices .section-prices__wrapper .section-prices__left .section-prices__item .section-prices-item__wrapper .active-price .active-list .section-prices__text::after {
               content: '';
+              cursor: pointer;
               position: absolute;
-              top: 17px;
-              right: 40px;
-              width: 16px;
-              height: 16px;
-              border-radius: 50%;
-              background: url("../img/Larrow.png") #D9D9D9 center no-repeat; }
+              -webkit-transition: .4s ease-out;
+              -o-transition: .4s ease-out;
+              transition: .4s ease-out;
+              -webkit-transform: rotate(180deg);
+              -ms-transform: rotate(180deg);
+              transform: rotate(180deg); }
       main .section-prices .section-prices__wrapper .section-prices__right {
         display: -webkit-box;
         display: -ms-flexbox;
@@ -1215,6 +1286,15 @@ footer {
       -ms-flex-align: center;
       align-items: center;
       text-align: center; }
+      main .section-prices .section-prices__wrapper .section-prices__item .section-prices-item__wrapper .list__wrapper {
+        max-width: 250px; }
+        main .section-prices .section-prices__wrapper .section-prices__item .section-prices-item__wrapper .list__wrapper .list {
+          padding: 0; }
+          main .section-prices .section-prices__wrapper .section-prices__item .section-prices-item__wrapper .list__wrapper .list .section-prices__text {
+            max-width: 250px;
+            text-align: left; }
+          main .section-prices .section-prices__wrapper .section-prices__item .section-prices-item__wrapper .list__wrapper .list .section-prices__content {
+            text-align: left; }
       main .section-prices .section-prices__wrapper .section-prices__right {
         min-width: 500px;
         text-align: center;
@@ -1418,21 +1498,47 @@ footer {
             max-width: 224px;
             min-height: 235px;
             padding: 29px 22px; }
-            main .section-prices .section-prices__wrapper .section-prices__left .section-prices__item .section-prices-item__wrapper .list {
-              max-width: 180px;
-              margin-top: 13px;
-              margin-bottom: 0; }
-              main .section-prices .section-prices__wrapper .section-prices__left .section-prices__item .section-prices-item__wrapper .list .section-prices__text {
-                padding: 16px 5px 16px 30px;
-                max-width: 89px;
-                font-size: 15px;
-                line-height: 20px;
-                white-space: nowrap; }
-              main .section-prices .section-prices__wrapper .section-prices__left .section-prices__item .section-prices-item__wrapper .list:nth-child(1) {
-                margin-top: -1px; }
-              main .section-prices .section-prices__wrapper .section-prices__left .section-prices__item .section-prices-item__wrapper .list::after {
-                top: 18px;
-                right: 40px; }
+            main .section-prices .section-prices__wrapper .section-prices__left .section-prices__item .section-prices-item__wrapper .list__wrapper {
+              min-width: 180px;
+              margin-bottom: 14px; }
+              main .section-prices .section-prices__wrapper .section-prices__left .section-prices__item .section-prices-item__wrapper .list__wrapper .list {
+                max-width: 180px;
+                margin-top: 13px;
+                margin-bottom: 0; }
+                main .section-prices .section-prices__wrapper .section-prices__left .section-prices__item .section-prices-item__wrapper .list__wrapper .list .section-prices__text {
+                  padding: 16px 0 16px 30px;
+                  margin: 0;
+                  text-align: left;
+                  max-width: 180px;
+                  font-size: 15px;
+                  line-height: 20px; }
+                main .section-prices .section-prices__wrapper .section-prices__left .section-prices__item .section-prices-item__wrapper .list__wrapper .list .section-prices__content {
+                  max-width: 180px;
+                  padding: 15px 20px 12px 20px;
+                  text-align: left; }
+                  main .section-prices .section-prices__wrapper .section-prices__left .section-prices__item .section-prices-item__wrapper .list__wrapper .list .section-prices__content .content-text {
+                    max-width: 139px; }
+                  main .section-prices .section-prices__wrapper .section-prices__left .section-prices__item .section-prices-item__wrapper .list__wrapper .list .section-prices__content ::after {
+                    content: '';
+                    position: absolute;
+                    left: 30px;
+                    top: 45px;
+                    border: 1px solid #AEA1A1;
+                    width: 100px; }
+                main .section-prices .section-prices__wrapper .section-prices__left .section-prices__item .section-prices-item__wrapper .list__wrapper .list:nth-child(1) {
+                  margin-top: -1px; }
+                main .section-prices .section-prices__wrapper .section-prices__left .section-prices__item .section-prices-item__wrapper .list__wrapper .list::after {
+                  top: 18px;
+                  right: 40px; }
+                main .section-prices .section-prices__wrapper .section-prices__left .section-prices__item .section-prices-item__wrapper .list__wrapper .list::after {
+                  content: '';
+                  position: absolute;
+                  top: 17px;
+                  right: 40px;
+                  width: 16px;
+                  height: 16px;
+                  border-radius: 50%;
+                  background: url("../img/Larrow.png") #D9D9D9 center no-repeat; }
       main .section-prices .section-prices__wrapper .section-prices__right {
         min-width: 296px; }
         main .section-prices .section-prices__wrapper .section-prices__right .section-prices-right-header {
