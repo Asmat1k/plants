@@ -57,6 +57,7 @@ function contacts() {
     const img = document.querySelector('.section-contacts-img');
     const arrow = document.querySelector('.list-title');
     const list = document.querySelectorAll('.list-content>ul>li');
+    const mainUl = document.querySelector('.uList');
     const card = document.querySelector('.section-contacts__card');
     const cardCity = document.querySelector('.card-city');
     const cardPhone = document.querySelector('.card-phone');
@@ -65,15 +66,16 @@ function contacts() {
     const city = ['Canandaigua, NY','New York City','Yonkers, NY','Sherrill, NY'];
     const phone = ['+1 585 393 0001','+1 212 456 0002','+1 914 678 0003','+1 315 908 0004'];
     const adress = ['151 Charlotte Street','9 East 91st Street','511 Warburton Ave','14 WEST Noyes BLVD'];
-    coll.addEventListener('click', function() {
-        act.classList.toggle('active-list');
+    arrow.addEventListener('click', function() {
+        act.classList.add('active-list');
         let content = document.querySelector('.list-content');
         if(content.style.maxHeight) {
             content.style.maxHeight = null;
             arrow.className = "list-title";
         }
         else {
-            coll.style.marginTop = '61px'
+            if(window.screen.width<=1220) 
+                coll.style.marginTop = '61px'
             content.style.maxHeight = '234px';
             arrow.className = "active-after";
             img.style.marginTop = '-21px';
@@ -85,21 +87,26 @@ function contacts() {
                     img.style.marginTop = '-60px';
             }
         }
-        if(act.classList.contains('active-list'))
+        if(act.classList.contains('active-list')) {
             card.style.display = 'none';
-        for(let i=0; i<list.length; i++) {
-            list[i].addEventListener("click", function() {
-                arrow.textContent = list[i].textContent;
-                cardCity.textContent = city[i];
-                cardPhone.textContent = phone[i];
-                cardAdress.textContent = adress[i];
-                card.style.display = 'block';
-                call.addEventListener('click', function() {
-                    window.open("tel:"+ phone[i]);
-                })
-            })
         }
-    
+        else card.style.display = 'block';
+        if(card.style.display=='none')
+            for(let i=0; i<list.length; i++) {
+                list[i].addEventListener("click", function() {
+                    act.classList.remove('active-list');
+                    content.style.maxHeight = null;
+                    arrow.className = "list-title";
+                    arrow.textContent = list[i].textContent;
+                    cardCity.textContent = city[i];
+                    cardPhone.textContent = phone[i];
+                    cardAdress.textContent = adress[i];
+                    card.style.display = 'block';
+                    call.addEventListener('click', function() {
+                        window.open("tel:"+ phone[i]);
+                    })
+                })
+            }
     });
 }
 
