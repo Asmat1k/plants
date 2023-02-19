@@ -1,3 +1,4 @@
+import playList from './playList.js';
 // показ времени
 function showTime() {
     const time = document.querySelector('.time');
@@ -107,7 +108,10 @@ async function getWeather() {
     }
     window.addEventListener('beforeunload', setLocalStorage);
     function getLocalStorage() {
-        city.value = localStorage.getItem('city');
+        if(localStorage.getItem('city'))
+            city.value = localStorage.getItem('city');
+        else 
+            city.value = 'Минск';
         getWeather();
     }
     window.addEventListener('load', getLocalStorage);
@@ -119,14 +123,21 @@ async function getWeather() {
     const weatherDescription = document.querySelector('.weather-description');
     const wind = document.querySelector('.wind');
     const humidity = document.querySelector('.humidity');
-    weatherIcon.classList.add(`owf-${data.weather[0].id}`);
-    temperature.textContent = `${Math.floor(data.main.temp)}°C`;
-    weatherDescription.textContent = data.weather[0].description;
-    wind.textContent = `Скорость ветра: ${Math.floor(data.wind.speed)} м/с`;
-    humidity.textContent = `Влажность: ${data.main.humidity}%`
+    if(data.cod != 404) {
+        weatherIcon.classList.add(`owf-${data.weather[0].id}`);
+        temperature.textContent = `${Math.floor(data.main.temp)}°C`;
+        weatherDescription.textContent = data.weather[0].description;
+        wind.textContent = `Скорость ветра: ${Math.floor(data.wind.speed)} м/с`;
+        humidity.textContent = `Влажность: ${data.main.humidity}%`;
+    }
+    else {
+        temperature.textContent = `Город введен неверно`;
+        weatherDescription.textContent = ``;
+        wind.textContent = `Попробуйте ещё раз`;
+        humidity.textContent = ``;
+    }
     city.addEventListener('change', getWeather);
 }
-
 
 async function getQuotes() {
     const quotes = 'data.json';
@@ -141,7 +152,76 @@ async function getQuotes() {
     refresh.addEventListener('click', getQuotes);
 }
 
+const audio = new Audio();
+let playNum = 0;
+let isPlay = false;
 
+
+function playNext() {
+    playNum = playNum < 3 ? playNum+1 : 0;
+    isPlay = true;
+    playAudio();
+}
+
+function playPrev() {
+    playNum = playNum >= 1 ? playNum-1 : 3;
+    isPlay = true;
+    playAudio();
+}
+
+function changeSong() {
+    const playNext_ = document.querySelector('.play-next');
+    const playPrev_ = document.querySelector('.play-prev');
+    playNext_.addEventListener('click', playNext);
+    playPrev_.addEventListener('click', playPrev);
+}
+
+function addPlayList() {
+    const playListContainer = document.querySelector('.play-list');
+    for(let i = 0; i < playList.length; i++) {
+        const li = document.createElement('li');
+        li.classList.add('play-item');
+        li.textContent = playList[i].title;
+        playListContainer.append(li);
+    }
+}
+
+function playAudio() {
+    const playButton = document.querySelector('.play');
+    const li = document.querySelectorAll('ul>li');
+    audio.src = playList[playNum].src;
+    for(let i=0; i<li.length; i++) {
+        if(li[i].classList.contains('item-active'))
+            li[i].classList.remove('item-active');
+    }
+    if(isPlay) {
+        isPlay = true;
+        playButton.classList.add('pause');
+        audio.currentTime = 0;
+        audio.play();
+        li[playNum].classList.add('item-active');
+    }
+    else {
+        playButton.addEventListener('click', function() {
+            if(!isPlay) {
+                isPlay = true;
+                playButton.classList.add('pause');
+                audio.currentTime = 0;
+                audio.play();
+                li[playNum].classList.add('item-active');
+            }
+            else if(isPlay) {
+                isPlay = false;
+                playButton.classList.remove('pause');
+                audio.pause();
+            }
+        });
+    }
+}
+
+addPlayList();
+changeSong();
+playAudio();
 getQuotes();
 getWeather();
 showTime();
