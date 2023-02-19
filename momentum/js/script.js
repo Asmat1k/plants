@@ -139,6 +139,7 @@ async function getWeather() {
     city.addEventListener('change', getWeather);
 }
 
+// цитаты
 async function getQuotes() {
     const quotes = 'data.json';
     const res = await fetch(quotes);
@@ -156,7 +157,7 @@ const audio = new Audio();
 let playNum = 0;
 let isPlay = false;
 
-
+// контроль над песней
 function playNext() {
     playNum = playNum < 3 ? playNum+1 : 0;
     isPlay = true;
@@ -176,6 +177,7 @@ function changeSong() {
     playPrev_.addEventListener('click', playPrev);
 }
 
+// создание юзер френдли плейлиста
 function addPlayList() {
     const playListContainer = document.querySelector('.play-list');
     for(let i = 0; i < playList.length; i++) {
@@ -186,9 +188,12 @@ function addPlayList() {
     }
 }
 
+// играть и паузить аудио
 function playAudio() {
+    const currentMusic = document.querySelector('.current-music')
     const playButton = document.querySelector('.play');
     const li = document.querySelectorAll('ul>li');
+    currentMusic.textContent = playList[playNum].title;
     audio.src = playList[playNum].src;
     for(let i=0; i<li.length; i++) {
         if(li[i].classList.contains('item-active'))
@@ -218,6 +223,60 @@ function playAudio() {
         });
     }
 }
+
+// прогрессБар двжиение
+function updateProgress(event) {
+    const progress = document.querySelector('.progress');
+    const curT = document.querySelector('.currentTime');
+    const dur = document.querySelector('.duration');
+    const {duration, currentTime} = event.srcElement;
+    curT.textContent = outTime(currentTime);
+    dur.textContent = outTime(duration);
+    if (dur.innerHTML === "NaN:NaN") {
+        dur.innerHTML = 'wait'
+    }
+    const progressPercent = (currentTime / duration) * 100;
+    progress.style.width = `${progressPercent}%`
+}
+audio.addEventListener('timeupdate', updateProgress);
+
+// вывод времени
+function outTime(time) {
+    let min = Math.floor(time/60) < 10 ? '0' + Math.floor(time/60) : Math.floor(time/60);
+    let sec = Math.floor(time) < 10 ? '0' + Math.floor(time) : Math.floor(time);
+    if(sec > 59) {
+        sec = Math.floor(time)-60;
+    }
+    return  `${min}:${sec}`;
+}
+
+const progressBar = document.querySelector('.player-progressbar');
+// перемотка прогрессБаром
+function setProgress(event) {
+    const width = this.clientWidth;
+    const clickX = event.offsetX;
+    const duration = audio.duration;
+    audio.currentTime = (clickX / width) * duration;
+}
+progressBar.addEventListener('click', setProgress);
+
+// мут музыки
+const mute = document.querySelector('.mute');
+let isMuted = false;
+function muteMusic() {
+    console.log(isMuted);
+    if(!isMuted) {
+        audio.volume = 0.0001;
+        isMuted = true;
+    }
+    else {
+        audio.volume = 1;
+        isMuted = false;
+    }
+}
+mute.addEventListener('click', muteMusic);
+
+audio.addEventListener('ended', playNext);
 
 addPlayList();
 changeSong();

@@ -11,10 +11,19 @@
 <body>
   <header class="header">
     <div class="player">
-      <div class="player-controls">
-        <button class="play-prev player-icon"></button>
-        <button class="play player-icon"></button>
-        <button class="play-next player-icon"></button>
+      <div class="player-controls__wrapper">
+        <div class="player-controls">
+          <button class="play-prev player-icon"></button>
+          <button class="play player-icon"></button>
+          <button class="play-next player-icon"></button>
+          <button class="mute player-icon"></button>
+        </div>
+        <div class="current-music"></div>
+        <div class="player-progressbar">
+          <div class="progress"></div>
+          <div class="currentTime"></div>
+          <div class="duration"></div>
+        </div>
       </div>
       <ul class="play-list"></ul>
     </div>
@@ -49,6 +58,6 @@
       <div class="author"></div>
     </div>
   </footer>
-  <script src="js/script.js"></script>
+  <script type="module" src="js/script.js"></script>
 </body>
 </html>
