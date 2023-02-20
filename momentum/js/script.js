@@ -1,4 +1,15 @@
 import playList from './playList.js';
+
+const progressBar = document.querySelector('.player-progressbar');
+const progressVolume = document.querySelector('.volume-progressbar');
+const mute = document.querySelector('.volume');
+const audio = new Audio();
+let randomNum;
+let playNum = 0;
+let isPlay = false;
+let isMuted = false;
+
+
 // показ времени
 function showTime() {
     const time = document.querySelector('.time');
@@ -59,9 +70,6 @@ function getLocalStorage() {
 }
 window.addEventListener('load', getLocalStorage);
 
-let randomNum;
-getRandomNum();
-
 // установка рандомного фона
 function setBg() {
     const body = document.querySelector('body');
@@ -82,10 +90,12 @@ function getRandomNum() {
     randomNum = (Math.floor(Math.random() * 20) + 1).toString();
 }
 
+// следующее изображение
 function getSlideNext() {
     randomNum = randomNum < 20? Number(randomNum)+1 : 1;
 }
 
+// предыдущее изображения
 function getSlidePrev() {
     randomNum = randomNum == 1 ? 20 : Number(randomNum)-1;
 }
@@ -98,15 +108,15 @@ function slideImg() {
     slidePrev.addEventListener('click', getSlidePrev);
 }
 
-
 // получение погды
 async function getWeather() {
-    // загрузка города из лс
+    // загрузка города в лс
     const city = document.querySelector('.city');
     function setLocalStorage() {
         localStorage.setItem('city', city.value);
     }
     window.addEventListener('beforeunload', setLocalStorage);
+    // загрузка города из лс
     function getLocalStorage() {
         if(localStorage.getItem('city'))
             city.value = localStorage.getItem('city');
@@ -115,14 +125,14 @@ async function getWeather() {
         getWeather();
     }
     window.addEventListener('load', getLocalStorage);
+    const weatherDescription = document.querySelector('.weather-description');
+    const weatherIcon = document.querySelector('.weather-icon');
+    const temperature = document.querySelector('.temperature');
+    const humidity = document.querySelector('.humidity');
+    const wind = document.querySelector('.wind');
     const url = `https://api.openweathermap.org/data/2.5/weather?q=${city.value}&lang=ru&appid=551cb3c09778bc804cc88404eee46c7e&units=metric`;
     const res = await fetch(url);
     const data = await res.json();
-    const weatherIcon = document.querySelector('.weather-icon');
-    const temperature = document.querySelector('.temperature');
-    const weatherDescription = document.querySelector('.weather-description');
-    const wind = document.querySelector('.wind');
-    const humidity = document.querySelector('.humidity');
     if(data.cod != 404) {
         weatherIcon.classList.add(`owf-${data.weather[0].id}`);
         temperature.textContent = `${Math.floor(data.main.temp)}°C`;
@@ -141,35 +151,33 @@ async function getWeather() {
 
 // цитаты
 async function getQuotes() {
+    const refresh = document.querySelector('.change-quote');
+    const author = document.querySelector('.author');
+    const quote = document.querySelector('.quote');
     const quotes = 'data.json';
     const res = await fetch(quotes);
     const data = await res.json();
-    const quote = document.querySelector('.quote');
-    const author = document.querySelector('.author');
-    const refresh = document.querySelector('.change-quote');
-    const rand = (Math.floor(Math.random() * 20) + 1);
+    const rand = (Math.floor(Math.random() * 19) + 0);
     quote.textContent = data[rand].text;
     author.textContent = data[rand].author;
     refresh.addEventListener('click', getQuotes);
 }
 
-const audio = new Audio();
-let playNum = 0;
-let isPlay = false;
-
-// контроль над песней
+// играть следующую песню
 function playNext() {
     playNum = playNum < 3 ? playNum+1 : 0;
     isPlay = true;
     playAudio();
 }
 
+// играть предыдущую песню
 function playPrev() {
     playNum = playNum >= 1 ? playNum-1 : 3;
     isPlay = true;
     playAudio();
 }
 
+// смена песни
 function changeSong() {
     const playNext_ = document.querySelector('.play-next');
     const playPrev_ = document.querySelector('.play-prev');
@@ -177,16 +185,35 @@ function changeSong() {
     playPrev_.addEventListener('click', playPrev);
 }
 
-// создание юзер френдли плейлиста
+//если песня закончена, то играть следующую
+audio.addEventListener('ended', playNext);
+
+// создание плейлиста по файлу
 function addPlayList() {
     const playListContainer = document.querySelector('.play-list');
     for(let i = 0; i < playList.length; i++) {
         const li = document.createElement('li');
+        const img = document.createElement('img');
+        const wrapper = document.createElement('div');
+        wrapper.classList.add('wrapper');
+        img.src =  "../assets/svg/play.svg";
+        img.classList.add('player-icon');
         li.classList.add('play-item');
         li.textContent = playList[i].title;
-        playListContainer.append(li);
+        wrapper.append(img);
+        wrapper.append(li);
+        playListContainer.append(wrapper);
+    }
+    const buttons = document.querySelectorAll('.wrapper > img'); 
+    function playListOn() {
+        console.log(buttons);
+    }
+    for(let i=0; i<buttons.length; i++) {
+        buttons[i].addEventListener('click', playListOn);
     }
 }
+
+
 
 // играть и паузить аудио
 function playAudio() {
@@ -240,7 +267,7 @@ function updateProgress(event) {
 }
 audio.addEventListener('timeupdate', updateProgress);
 
-// вывод времени
+// конвретер в нормальный вид времени
 function outTime(time) {
     let min = Math.floor(time/60) < 10 ? '0' + Math.floor(time/60) : Math.floor(time/60);
     let sec = Math.floor(time) < 10 ? '0' + Math.floor(time) : Math.floor(time);
@@ -250,7 +277,6 @@ function outTime(time) {
     return  `${min}:${sec}`;
 }
 
-const progressBar = document.querySelector('.player-progressbar');
 // перемотка прогрессБаром
 function setProgress(event) {
     const width = this.clientWidth;
@@ -260,24 +286,35 @@ function setProgress(event) {
 }
 progressBar.addEventListener('click', setProgress);
 
-// мут музыки
-const mute = document.querySelector('.mute');
-let isMuted = false;
+// регулировка звука прогрессбаром
+function setVolume(event) {
+    const progressActive = document.querySelector('.volume-progress')
+    const width = this.clientWidth;
+    const clickX = event.offsetX;
+    const volumePercent = (clickX / width) * 100;
+    audio.volume = (clickX / width);
+    progressActive.style.width = `${volumePercent}%`;
+    isMuted = false;
+}
+progressVolume.addEventListener('click', setVolume);
+
+// мут/анмут музыки
 function muteMusic() {
-    console.log(isMuted);
+    mute.classList.toggle('volumeOff');
     if(!isMuted) {
-        audio.volume = 0.0001;
+        audio.muted = true;
         isMuted = true;
     }
     else {
-        audio.volume = 1;
+        audio.muted = false;
         isMuted = false;
     }
 }
 mute.addEventListener('click', muteMusic);
 
-audio.addEventListener('ended', playNext);
 
+
+getRandomNum();
 addPlayList();
 changeSong();
 playAudio();

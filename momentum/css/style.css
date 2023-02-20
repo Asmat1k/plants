@@ -35,7 +35,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 180px;
+  width: 250px;
   margin-bottom: 10px;
 }
 
@@ -43,12 +43,12 @@ body {
   position: relative;
   background: white;
   border-radius: 5px;
-  width: 100%;
+  width: 180px;
   height: 10px;
   display: flex;
   align-items: center;
   cursor: pointer;
-  margin-bottom: 20px;
+  margin-bottom: 5px;
 }
 
 .progress {
@@ -76,16 +76,23 @@ body {
 
 .play-list {
   text-align: left;
+  display: flex;
+  flex-direction: column;
 }
 
 .play-item {
   position: relative;
-  padding: 5px;
-  padding-left: 20px;
+  display: flex;
+  align-items: center;
   list-style: none;
-  opacity: .8;
   cursor: pointer;
+  padding-left: 10px;
+  opacity: .8;
   transition: .3s;
+}
+
+.wrapper {
+  display: flex;
 }
 
 .play-item:hover {
@@ -93,7 +100,7 @@ body {
 }
 
 .play-item::before {
-  content: "\2713";  
+  content: '';  
   position: absolute;
   left: 0;
   top: 2px;
@@ -153,8 +160,41 @@ body {
   background-image: url("../assets/svg/play-next.svg");
 }
 
-.mute {
-  background-image: url("../assets/svg/reload.svg");
+.volume-container {
+  display: flex;
+  align-items: center;
+  position: relative;
+  min-width: 100px;
+}
+
+.volume-container:hover > .volume-progressbar {
+  min-width: 70px
+}
+
+.volume-progressbar {
+  cursor: pointer;
+  position: absolute;
+  left: 40px;
+  min-width: 0;
+  min-height: 10px;
+  background-color: white;
+  border-radius: 5px;
+  transition: .25s;
+}
+
+.volume-progress {
+  min-width: 0%;
+  min-height: 10px;
+  background-color: grey;
+  border-radius: 5px;
+}
+
+.volume {
+  background-image: url("../assets/img/volumeOn.png");
+}
+
+.volumeOff {
+  background-image: url("../assets/img/volumeOff.png");
 }
 
 .weather {
