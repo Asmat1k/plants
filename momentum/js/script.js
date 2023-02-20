@@ -193,10 +193,10 @@ function addPlayList() {
     const playListContainer = document.querySelector('.play-list');
     for(let i = 0; i < playList.length; i++) {
         const li = document.createElement('li');
-        const img = document.createElement('img');
+        const img = document.createElement('button');
         const wrapper = document.createElement('div');
         wrapper.classList.add('wrapper');
-        img.src =  "../assets/svg/play.svg";
+        img.classList.add('playLi')
         img.classList.add('player-icon');
         li.classList.add('play-item');
         li.textContent = playList[i].title;
@@ -204,50 +204,75 @@ function addPlayList() {
         wrapper.append(li);
         playListContainer.append(wrapper);
     }
-    const buttons = document.querySelectorAll('.wrapper > img'); 
-    function playListOn() {
-        console.log(buttons);
-    }
-    for(let i=0; i<buttons.length; i++) {
-        buttons[i].addEventListener('click', playListOn);
-    }
 }
 
-
-
+// клик на список
+function activeList() {
+    const buttons = document.querySelectorAll('.wrapper > button');
+    const butLength = buttons.length;
+    for(let i=0; i<butLength; i++) {
+        buttons[i].addEventListener('click', function() {
+            if(buttons[i].classList.contains('pause')) {
+                isPlay = false;
+                buttons[i].classList.remove('pause');
+                audio.pause();
+            }
+            else {
+                isPlay = true;
+                unActiveList();
+                buttons[i].classList.add('pause');
+                playNum = i;
+                audio.src = playList[playNum].src;
+                audio.currentTime = 0;
+                audio.play();
+            }
+            console.log(playList[playNum]);
+        });
+    }
+}
+ 
 // играть и паузить аудио
 function playAudio() {
     const currentMusic = document.querySelector('.current-music')
     const playButton = document.querySelector('.play');
-    const li = document.querySelectorAll('ul>li');
+    const buttons = document.querySelectorAll('.wrapper > button');
     currentMusic.textContent = playList[playNum].title;
     audio.src = playList[playNum].src;
-    for(let i=0; i<li.length; i++) {
-        if(li[i].classList.contains('item-active'))
-            li[i].classList.remove('item-active');
-    }
+    // листание кнопками
     if(isPlay) {
-        isPlay = true;
-        playButton.classList.add('pause');
         audio.currentTime = 0;
         audio.play();
-        li[playNum].classList.add('item-active');
+        unActiveList();
+        //li[playNum].classList.toggle('chosen');
+        playButton.classList.add('pause');
+        buttons[playNum].classList.add('pause');
     }
-    else {
+    else if(!isPlay) {
+        // клик по главной кнопке
         playButton.addEventListener('click', function() {
             if(!isPlay) {
                 isPlay = true;
-                playButton.classList.add('pause');
                 audio.currentTime = 0;
                 audio.play();
-                li[playNum].classList.add('item-active');
+                buttons[playNum].classList.add('pause');
+                playButton.classList.add('pause');
             }
             else if(isPlay) {
                 isPlay = false;
-                playButton.classList.remove('pause');
                 audio.pause();
+                buttons[playNum].classList.remove('pause');
+                playButton.classList.remove('pause');
             }
         });
+    } 
+}
+
+// деактивировать список
+function unActiveList() {
+    const buttons = document.querySelectorAll('.wrapper > button');
+    const butLength = buttons.length;
+    for(let j=0; j<butLength; j++) {
+        buttons[j].classList.remove('pause');
     }
 }
 
@@ -317,6 +342,7 @@ mute.addEventListener('click', muteMusic);
 getRandomNum();
 addPlayList();
 changeSong();
+activeList();
 playAudio();
 getQuotes();
 getWeather();
