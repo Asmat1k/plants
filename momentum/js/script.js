@@ -2,33 +2,38 @@ import playList from './playList.js';
 
 const progressBar = document.querySelector('.player-progressbar');
 const progressVolume = document.querySelector('.volume-progressbar');
+const settings = document.querySelector('.settings');
 const mute = document.querySelector('.volume');
 const audio = new Audio();
 let randomNum;
 let playNum = 0;
 let isPlay = false;
 let isMuted = false;
-
+const greetingTranslation = {
+    'en': ['Good night','Good morning','Good afternoon','Good evening'],
+    'ru': ['Доброй ночи','Доброе утро','Добрый день','Добрый вечер'],
+};
+const lang = 'ru';
 
 // показ времени
 function showTime() {
     const time = document.querySelector('.time');
     const date  = new Date();
-    const currentTime =  date.toLocaleTimeString();
+    const currentTime = lang == 'en' ? date.toLocaleTimeString('en-US') : date.toLocaleTimeString();
     time.textContent = currentTime;
-    showDate();
-    showGreeting();
+    showDate(lang);
+    showGreeting(lang);
     slideImg();
     setBg();
     setTimeout(showTime, 1000);
 }
 
 // пока даты
-function showDate() {
+function showDate(lang) {
     const element = document.querySelector('.date');
     const date = new Date();
     const options = {weekday: 'long', month: 'long', day: 'numeric', timeZone: 'UTC'};
-    const currentDate = date.toLocaleDateString('ru-Ru', options);
+    const currentDate = lang == 'en' ? date.toLocaleDateString('en-US', options) : date.toLocaleDateString('ru-Ru', options);
     element.textContent = currentDate;
 }
 
@@ -38,20 +43,21 @@ function showGreeting() {
     const date = new Date();
     const hours = date.getHours();
     const timeofDay = getTimeOfDay(hours);
-    element.textContent = timeofDay == 'night' ? 'Доброй ночи,' : timeofDay == 'morning' ? 'Доброе утро' : timeofDay == 'afternoon' ? 'Добрый день,' : 'Добрый вечер,';
+    //element.textContent = timeofDay == 'night' ? 'Доброй ночи,' : timeofDay == 'morning' ? 'Доброе утро' : timeofDay == 'afternoon' ? 'Добрый день,' : 'Добрый вечер,';
+    element.textContent = lang == 'en' ?  greetingTranslation.en[timeofDay] : element.textContent = greetingTranslation.ru[timeofDay];;
 }
 
 // какое время суток
 function getTimeOfDay(hours) {
     hours =  Math.floor(hours/6);
     if(hours < 1)
-        return 'night'
+        return 0
     else if(hours < 2)
-        return 'morning';
+        return 1;
     else if(hours < 3)
-        return 'afternoon';
+        return 2;
     else 
-        return 'evening';
+        return 3;
 }
 
 // в лока сторэдж
@@ -76,10 +82,11 @@ function setBg() {
     const date = new Date();
     const hours = date.getHours();
     let timeOfDay = getTimeOfDay(hours);
+    let timeOfDatText = timeOfDay == 0 ? 'night' : timeOfDay == 1 ? 'morning' : timeOfDay == 2 ? 'afternoon' : 'evening';
     let bgNum = randomNum.toString();
     bgNum = bgNum < 10 ? '0' + bgNum.toString() : bgNum.toString();
     const img = new Image();
-    img.src = `https://raw.githubusercontent.com/rolling-scopes-school/stage1-tasks/assets/images/${timeOfDay}/${bgNum}.jpg`;
+    img.src = `https://raw.githubusercontent.com/rolling-scopes-school/stage1-tasks/assets/images/${timeOfDatText}/${bgNum}.jpg`;
     img.onload = () => {
         body.style.backgroundImage = `url(${img.src}`;
     }
@@ -130,21 +137,34 @@ async function getWeather() {
     const temperature = document.querySelector('.temperature');
     const humidity = document.querySelector('.humidity');
     const wind = document.querySelector('.wind');
-    const url = `https://api.openweathermap.org/data/2.5/weather?q=${city.value}&lang=ru&appid=551cb3c09778bc804cc88404eee46c7e&units=metric`;
+    const url = `https://api.openweathermap.org/data/2.5/weather?q=${city.value}&lang=${lang}&appid=551cb3c09778bc804cc88404eee46c7e&units=metric`;
     const res = await fetch(url);
     const data = await res.json();
     if(data.cod != 404) {
         weatherIcon.classList.add(`owf-${data.weather[0].id}`);
         temperature.textContent = `${Math.floor(data.main.temp)}°C`;
         weatherDescription.textContent = data.weather[0].description;
-        wind.textContent = `Скорость ветра: ${Math.floor(data.wind.speed)} м/с`;
-        humidity.textContent = `Влажность: ${data.main.humidity}%`;
+        if(lang=='ru') {
+            wind.textContent = `Скорость ветра: ${Math.floor(data.wind.speed)} м/с`;
+            humidity.textContent = `Влажность: ${data.main.humidity}%`;
+        }
+        else {
+            wind.textContent = `Wind speed: ${Math.floor(data.wind.speed)} м/с`;
+            humidity.textContent = `Humidity: ${data.main.humidity}%`;
+        }
     }
     else {
-        temperature.textContent = `Город введен неверно`;
         weatherDescription.textContent = ``;
-        wind.textContent = `Попробуйте ещё раз`;
         humidity.textContent = ``;
+        if(lang=='ru') {
+            temperature.textContent = `Город введен неверно`;
+            wind.textContent = `Попробуйте ещё раз`;
+        }
+        else {
+            temperature.textContent = `Wrong city`;
+            wind.textContent = `Try again`;
+        }
+        
     }
     city.addEventListener('change', getWeather);
 }
@@ -158,8 +178,14 @@ async function getQuotes() {
     const res = await fetch(quotes);
     const data = await res.json();
     const rand = (Math.floor(Math.random() * 19) + 0);
-    quote.textContent = data[rand].text;
-    author.textContent = data[rand].author;
+    if(lang=='ru') {
+        quote.textContent = data[rand].textRu;
+        author.textContent = data[rand].authorRu;
+    }
+    else {
+        quote.textContent = data[rand].textEn;
+        author.textContent = data[rand].authorEn;
+    }
     refresh.addEventListener('click', getQuotes);
 }
 
@@ -337,7 +363,13 @@ function muteMusic() {
 }
 mute.addEventListener('click', muteMusic);
 
-
+function openSettings() {
+    const settingsBlock = document.querySelector('.settings-block');
+    const info = document.querySelector('.settings-block-info');
+    info.classList.toggle('opened');
+    settingsBlock.classList.toggle('settings-block-open');
+}
+settings.addEventListener('click', openSettings);
 
 getRandomNum();
 addPlayList();
