@@ -3,6 +3,7 @@ import playList from './playList.js';
 const progressBar = document.querySelector('.player-progressbar');
 const progressVolume = document.querySelector('.volume-progressbar');
 const settings = document.querySelector('.settings');
+const language = document.querySelector('.slider');
 const mute = document.querySelector('.volume');
 const audio = new Audio();
 let randomNum;
@@ -13,7 +14,22 @@ const greetingTranslation = {
     'en': ['Good night','Good morning','Good afternoon','Good evening'],
     'ru': ['Доброй ночи','Доброе утро','Добрый день','Добрый вечер'],
 };
-const lang = 'ru';
+let lang = 'ru';
+
+// смена языка
+function changeLanguage() {
+    language.classList.toggle('active');
+    if(language.classList.contains('active')) {
+        lang = 'en';
+        console.log(lang);
+    }
+    else {
+        lang = 'ru';
+    }
+    showTime();
+    getWeather();
+}
+language.addEventListener('click', changeLanguage);
 
 // показ времени
 function showTime() {
@@ -29,7 +45,7 @@ function showTime() {
 }
 
 // пока даты
-function showDate(lang) {
+function showDate() {
     const element = document.querySelector('.date');
     const date = new Date();
     const options = {weekday: 'long', month: 'long', day: 'numeric', timeZone: 'UTC'};
@@ -363,14 +379,40 @@ function muteMusic() {
 }
 mute.addEventListener('click', muteMusic);
 
+// открытие настроек
 function openSettings() {
     const settingsBlock = document.querySelector('.settings-block');
     const info = document.querySelector('.settings-block-info');
     info.classList.toggle('opened');
     settingsBlock.classList.toggle('settings-block-open');
+    settingsBlock.classList.toggle('opened');
 }
 settings.addEventListener('click', openSettings);
 
+
+const player = document.querySelector('.player');
+const weather = document.querySelector('.weather');
+const time = document.querySelector('.time');
+const date = document.querySelector('.date')
+const greeting = document.querySelector('.greeting')
+function hideBlock() {
+    const mas = [player, weather, time, date, greeting];
+    const switchButton = document.querySelectorAll('.hide-switch > .switch > .round');
+    console.log(switchButton);
+    const length = switchButton.length;
+    for(let i=0; i<length; i++) {
+        switchButton[i].addEventListener('click', function() {
+            if(mas[i].classList.contains('opacity'))
+                mas[i].classList.remove('opacity');
+            else
+                mas[i].classList.add('opacity');
+        });
+    }
+}
+
+
+
+hideBlock();
 getRandomNum();
 addPlayList();
 changeSong();
