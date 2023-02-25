@@ -137,18 +137,22 @@ body {
 }
 
 .settings-block-open {
-  bottom: 300px;
+  bottom: 280px;
 }
 
 .settings-block-info {
+  position: relative;
   display: flex;
   flex-direction: column;
   max-width: 400px;
-  margin: 20px auto;
+  margin: 10px auto;
 }
 
-.opened {
-  display: block;
+.settings-block__close {
+  position: absolute;
+  cursor: pointer;
+  top: 0;  
+  right: -30px;
 }
 
 .opacity {
@@ -167,13 +171,79 @@ body {
   text-align: left;
 }
 
+.settings-block__input {
+  display: none;
+  max-width: 150px;
+  min-height: 30px;
+  margin: 10px auto;
+  padding: 5px;
+  border: 0;
+  border-bottom: 1px solid black;
+}
+
+.active-input {
+  display: block;
+}
+
 .language {
   max-width: 150px;
   margin: 0 auto;
+  margin-bottom: 10px;
+}
+
+.language-title {
+  display: flex;
+  align-items: center;
+  margin-right: 10px;
+}
+
+.bottom-block {
+  display: flex;
+  justify-content: space-between;
 }
 
 .hide {
   flex-direction: column;
+}
+
+.api-block {
+  max-width: 200px;
+}
+
+.title {
+  white-space: nowrap;
+  margin-bottom: 10px;
+}
+
+.chage-api__button {
+  background-color: transparent;
+  border: 0px;
+  font-size: 15px;
+  margin-right: 10px;
+}
+
+.chage-api__button:last-child {
+  margin: 0;
+}
+
+.chage-api__button:hover {
+  transform: scale(1.1);
+  transition: .25s;
+}
+
+.update {
+  display: none;
+  max-width: 100px;
+  max-height: 30px;
+  margin: 0 auto;
+  padding: 5px 15px;
+  border: 1px solid black;
+  border-radius: 10px;
+}
+
+.active-button {
+  font-size: 17px;
+  color: grey;
 }
 
 .hide-switch {
@@ -181,6 +251,13 @@ body {
   align-items: center;
   margin-left: 0;
   margin-bottom: 5px;
+}
+
+.warning {
+  display: none;
+  color: red;
+  font-weight: 700;
+  font-size: 16px;
 }
 
 .switch {
@@ -232,12 +309,20 @@ input:checked + .slider {
   background-color: #2196F3;
 }
 
+.active {
+  background-color: #2196F3;
+}
+
 input:focus + .slider {
   box-shadow: 0 0 1px #2196F3;
 }
 
 input:checked + .slider:before {
   transform: translateX(26px);
+}
+
+.opened {
+  display: block;
 }
 
 /* настройки end */

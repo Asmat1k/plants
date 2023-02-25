@@ -74,25 +74,25 @@
   },
   {
     "textRu": "Насколько проще было бы писать программы, если бы не заказчики.",
-    "textEn": "",
+    "textEn": "How much easier it would be to write programs if it were not for customers.",
     "authorRu": "Р. Мартин",
-    "authorEn": ""
+    "authorEn": "P. Martin"
   },
   {
     "textRu": "Преждевременная оптимизация — корень всех зол.",
-    "textEn": "How much easier it would be to write programs if it weren't for customers.",
+    "textEn": "Premature optimization is the root of all evil.",
     "authorRu": "Д. Кнутх",
     "authorEn": "D. Knuth"
   },
   {
     "textRu": "Намного легче портировать шелл, чем скрипт на шелле",
-    "textEn": "",
+    "textEn": "It is much easier to port a shell than a shell script",
     "authorRu": "Л. Волл",
-    "authorEn": ""
+    "authorEn": "L. Wall"
   },
   {
     "textRu": "Лень — главное достоинство программиста.",
-    "textEn": "It is much easier to port a shell than a shell script",
+    "textEn": "Laziness is the main advantage of a programmer.",
     "authorRu": "Л. Волл",
     "authorEn": "L. Voll"
   },

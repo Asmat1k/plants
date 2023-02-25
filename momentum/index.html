@@ -48,64 +48,78 @@
   <main class="main"> 
     <div class="settings-block">
       <div class="settings-block-info">
+        <div class="settings-block__close">❌</div>
         <div class="language block">
-          <div class="settings-block__title">
-            Language
-          </div>        
+          <h2 class="language-title title">
+            Язык
+          </h2>        
           <label class="switch">
             <input type="checkbox">
             <span class="slider slider-rus round"></span>
           </label>
         </div>
-        <div class="hide">
-          <h2 class="hide-title">
-            Hide
-          </h2> 
-          <div class="hide-switch">
-            <div class="settings-block__title">
-              Player
-            </div>        
-            <label class="switch">
-              <input type="checkbox">
-              <span class="slider round"></span>
-            </label>
-          </div> 
-          <div class="hide-switch">
-            <div class="settings-block__title">
-              Weather
-            </div>        
-            <label class="switch">
-              <input type="checkbox">
-              <span class="slider round"></span>
-            </label>
-          </div> 
-          <div class="hide-switch">
-            <div class="settings-block__title">
-              Time
-            </div>        
-            <label class="switch">
-              <input type="checkbox">
-              <span class="slider round"></span>
-            </label>
+        <div class="bottom-block">
+          <div class="hide">
+            <h2 class="title">
+              Видимость 
+            </h2> 
+            <div class="hide-switch">
+              <div class="settings-block__title">
+                Плеер
+              </div>        
+              <label class="switch">
+                <input type="checkbox">
+                <span class="slider round"></span>
+              </label>
+            </div> 
+            <div class="hide-switch">
+              <div class="settings-block__title">
+                Погода
+              </div>        
+              <label class="switch">
+                <input type="checkbox">
+                <span class="slider round"></span>
+              </label>
+            </div> 
+            <div class="hide-switch">
+              <div class="settings-block__title">
+                Время
+              </div>        
+              <label class="switch">
+                <input type="checkbox">
+                <span class="slider round"></span>
+              </label>
+            </div>
+            <div class="hide-switch">
+              <div class="settings-block__title">
+                Дата
+              </div>        
+              <label class="switch">
+                <input type="checkbox">
+                <span class="slider round"></span>
+              </label>
+            </div> 
+            <div class="hide-switch">
+              <div class="settings-block__title">
+                Привет
+              </div>        
+              <label class="switch">
+                <input type="checkbox">
+                <span class="slider round"></span>
+              </label>
+            </div>     
           </div>
-          <div class="hide-switch">
-            <div class="settings-block__title">
-              Date
-            </div>        
-            <label class="switch">
-              <input type="checkbox">
-              <span class="slider round"></span>
-            </label>
-          </div> 
-          <div class="hide-switch">
-            <div class="settings-block__title">
-              Greeting
-            </div>        
-            <label class="switch">
-              <input type="checkbox">
-              <span class="slider round"></span>
-            </label>
-          </div>     
+          <div class="api-block">
+            <h2 class="title">
+              Смена фона
+            </h2>
+            <button class="chage-api__button">GitHub</button>
+            <button class="chage-api__button api">Unsplash</button>
+            <button class="chage-api__button api">Flickr</button>
+            <input class='settings-block__input' type="text">
+            <button class="chage-api__button update">обновить</button>
+            <div class="warning">Невозможно найти данный запрос</div>
+          </div>
         </div>
       </div>
     </div>
