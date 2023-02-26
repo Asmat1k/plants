@@ -1,0 +1,123 @@
+[
+  {
+    "textRu": "Пишите код так, как будто сопровождать его будет склонный к насилию психопат, который знает, где вы живете",
+    "textEn": "Write the code as if it will be accompanied by a violent psychopath who knows where you live",
+    "authorRu": "Стив Макконнелл",
+    "authorEn": "Steve McConnell"
+  },
+  {
+    "textRu": "Сложность программы растет до тех пор, пока не превысит способности программиста",
+    "textEn": "The complexity of the program grows until it exceeds the abilities of the programmer",
+    "authorRu": "Артур Блох. Законы Мэрфи",
+    "authorEn": "Arthur Bloch. Murphy's Laws"
+  },
+  {
+    "textRu": "Ходить по воде и разрабатывать программы, следуя ТЗ, очень просто… если они заморожены",
+    "textEn": "Walking on water and developing programs following the TOR is very easy... if they are frozen",
+    "authorRu": "И. Берард",
+    "authorEn": "I. Berard"
+  },
+
+  {
+    "textRu": "Низкоуровневый язык — это когда требуется внимание к вещам, которые никак не связаны с программами на этом языке.",
+    "textEn": "A low—level language is when attention is required to things that have nothing to do with programs in that language.",
+    "authorRu": "А. Перлис",
+    "authorEn": "A. Perlis"
+  },
+  {
+    "textRu": "В хорошем дизайне добавление чего-то стоит дешевле, чем сама эта вещь.",
+    "textEn": "In a good design, adding something costs less than the thing itself.",
+    "authorRu": "Т. Гейл",
+    "authorEn": "T. Gale"
+  },
+  {
+    "textRu": "В теории, теория и практика неразделимы. На практике это не так.",
+    "textEn": "In theory, theory and practice are inseparable. In practice, this is not the case.",
+    "authorRu": "Я. Берра",
+    "authorEn": "J. Berra"
+  },
+  {
+    "textRu": "Я изобрел понятие «объектно-ориентированный», и могу заявить, что не имел в виду C++.",
+    "textEn": "I invented the concept of 'object-oriented', and I can say that I did not mean C++.",
+    "authorRu": "А. Кей",
+    "authorEn": "A. Kay"
+  },
+  {
+    "textRu": "Программисты — не математики, как бы нам этого ни хотелось.",
+    "textEn": "Programmers are not mathematicians, no matter how much we would like that.",
+    "authorRu": "Р. Габриель",
+    "authorEn": "R. Gabriel"
+  },
+  {
+    "textRu": "Простота — залог надежности.",
+    "textEn": "Simplicity is the key to reliability.",
+    "authorRu": "Е. Дижкстра",
+    "authorEn": "E. Digkstra"
+  },
+  {
+    "textRu": "Если вы хотите, чтобы код было легко и быстро писать — делайте его удобным для чтения.",
+    "textEn": "If you want the code to be easy and fast to write, make it easy to read.",
+    "authorRu": "Р. Мартин",
+    "authorEn": "R. Martin"
+  },
+  {
+    "textRu": "Программисты — не математики, как бы нам этого ни хотелось.",
+    "textEn": "Programmers are not mathematicians, no matter how much we would like that.",
+    "authorRu": "Р. Габриель",
+    "authorEn": "R. Gabriel"
+  },
+  {
+    "textRu": "Работает? Не трогай.",
+    "textEn": "Is it working? Don't touch.",
+    "authorRu": "Любой программист",
+    "authorEn": "Any programmer"
+  },
+  {
+    "textRu": "Насколько проще было бы писать программы, если бы не заказчики.",
+    "textEn": "How much easier it would be to write programs if it were not for customers.",
+    "authorRu": "Р. Мартин",
+    "authorEn": "P. Martin"
+  },
+  {
+    "textRu": "Преждевременная оптимизация — корень всех зол.",
+    "textEn": "Premature optimization is the root of all evil.",
+    "authorRu": "Д. Кнутх",
+    "authorEn": "D. Knuth"
+  },
+  {
+    "textRu": "Намного легче портировать шелл, чем скрипт на шелле",
+    "textEn": "It is much easier to port a shell than a shell script",
+    "authorRu": "Л. Волл",
+    "authorEn": "L. Wall"
+  },
+  {
+    "textRu": "Лень — главное достоинство программиста.",
+    "textEn": "Laziness is the main advantage of a programmer.",
+    "authorRu": "Л. Волл",
+    "authorEn": "L. Voll"
+  },
+  {
+    "textRu": "Одно аккуратное измерение стоит тысячи мнений экспертов.",
+    "textEn": "One neat measurement is worth a thousand expert opinions.",
+    "authorRu": "Г. Хоппер",
+    "authorEn": "G. Hopper"
+  },
+  {
+    "textRu": "Один раз напиши, 7 раз пофикси",
+    "textEn": "Write once, fix it 7 times",
+    "authorRu": "Т. Добров",
+    "authorEn": "T. Dobrov"
+  },
+  {
+    "textRu": "Если твой код работает, значит это хороший код",
+    "textEn": "If your code works, then it's a good code",
+    "authorRu": "М. Персон",
+    "authorEn": "M. Person"
+  },
+  {
+    "textRu": "Сегодня ты делаешь код, завтра код делает тебе деньги",
+    "textEn": "Today you make code, tomorrow code makes you money",
+    "authorRu": "С. Джобс",
+    "authorEn": "S. Jobs"
+  }
+] 
