@@ -34,7 +34,7 @@
     </div>
     <button class="settings">Настройки</button>
     <div class="weather">
-      <input type="text" class="city" />
+      <input type="text" class="city" maxlength="15" placeholder="..." />
       <i class="weather-icon owf"></i>
       <div class="weather-error"></div>
       <div class="description-container">
@@ -107,7 +107,16 @@
                 <input type="checkbox">
                 <span class="slider round"></span>
               </label>
-            </div>     
+            </div>
+            <div class="hide-switch">
+              <div class="settings-block__title">
+                Цитаты
+              </div>        
+              <label class="switch">
+                <input type="checkbox">
+                <span class="slider round"></span>
+              </label>
+            </div>          
           </div>
           <div class="api-block">
             <h2 class="title">
@@ -131,7 +140,7 @@
     <date class="date"></date>
     <div class="greeting-container">
       <span class="greeting"></span>
-      <input type="text" class="name" />
+      <input type="text" class="name" placeholder="[Введите имя]" maxlength="15"/>
     </div>
   </main>
   <footer class="footer">

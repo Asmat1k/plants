@@ -7,11 +7,12 @@ const settings = document.querySelector('.settings');
 const warning = document.querySelector('.warning');
 const language = document.querySelector('.slider');
 const mute = document.querySelector('.volume');
-const greeting = document.querySelector('.greeting');
+const greeting = document.querySelector('.greeting-container');
 const weather = document.querySelector('.weather');
 const player = document.querySelector('.player');
 const time = document.querySelector('.time');
 const date = document.querySelector('.date');
+const quotes = document.querySelector('footer');
 const audio = new Audio();
 const img = new Image();
 let randomNum;
@@ -19,10 +20,11 @@ let playNum = 0;
 let isPlay = false;
 let isMuted = false;
 const greetingTranslation = {
-    'en': ['Good night','Good morning','Good afternoon','Good evening'],
-    'ru': ['Доброй ночи','Доброе утро','Добрый день','Добрый вечер'],
+    'en': ['Good night,','Good morning,','Good afternoon,','Good evening,'],
+    'ru': ['Доброй ночи,','Доброе утро,','Добрый день,','Добрый вечер,'],
 };
-let lang = 'ru';
+let lang;
+let lastQuote;
 let source = 'GitHub';
 
 // в лока сторэдж c key
@@ -43,7 +45,7 @@ function changeLanguage() {
         setLocalStorageStatus('lang','ru');
     }
     showTime();
-    getQuotes();
+    translateQuote();
     getWeather();
     changeLangSettings()
 }
@@ -74,12 +76,13 @@ function showDate() {
 
 // показ приветствия
 function showGreeting() {
-    let element = document.querySelector('.greeting');
+    const element = document.querySelector('.greeting');
+    const name = document.querySelector('.name');
     const date = new Date();
     const hours = date.getHours();
     const timeofDay = getTimeOfDay(hours);
-    //element.textContent = timeofDay == 'night' ? 'Доброй ночи,' : timeofDay == 'morning' ? 'Доброе утро' : timeofDay == 'afternoon' ? 'Добрый день,' : 'Добрый вечер,';
-    element.textContent = lang == 'en' ?  greetingTranslation.en[timeofDay] : element.textContent = greetingTranslation.ru[timeofDay];;
+    name.placeholder = lang == 'en' ? '[Enter name]' : '[Введите имя]';
+    element.textContent = lang == 'en' ?  greetingTranslation.en[timeofDay] : element.textContent = greetingTranslation.ru[timeofDay];
 }
 
 // какое время суток
@@ -102,7 +105,7 @@ function setLocalStorage() {
 }
 window.addEventListener('beforeunload', setLocalStorage);
 
-// из локал сторэдж
+// из локал сторэдж 
 function getLocalStorage() {
     let name = document.querySelector('.name');
     if(localStorage.getItem('name')) {
@@ -112,31 +115,46 @@ function getLocalStorage() {
         if(localStorage.getItem('player')=='hide')
             player.classList.add('opacity');
     }
-    else if(localStorage.getItem('weather')) {
+    if(localStorage.getItem('weather')) {
         if(localStorage.getItem('weather')=='hide')
             weather.classList.add('opacity');
     }
-    else if(localStorage.getItem('time')) {
+    if(localStorage.getItem('time')) {
         if(localStorage.getItem('time')=='hide')
             time.classList.add('opacity');
     }
-    else if(localStorage.getItem('date')) {
+    if(localStorage.getItem('date')) {
         if(localStorage.getItem('date')=='hide')
             date.classList.add('opacity');
     }
-    else if(localStorage.getItem('greeting')) {
+    if(localStorage.getItem('greeting')) {
         if(localStorage.getItem('greeting')=='hide')
             greeting.classList.add('opacity');
     }
-    else if(localStorage.getItem('lang')) {
-        if(localStorage.getItem('lang')=='en')
-            lang = localStorage.getItem('lang');
+    if(localStorage.getItem('quotes')) {
+        if(localStorage.getItem('quotes')=='hide') {
+            quotes.classList.add('opacity');
+        }
     }
+    if(localStorage.getItem('lang')) {
+        if(localStorage.getItem('lang')=='en') {
+            language.classList.add('active');
+            lang = localStorage.getItem('lang');
+        }
+    }
+    /*
+    else {
+        setLocalStorageStatus('lang','ru');
+        lang = 'ru';
+    }
+    */
 }
 window.addEventListener('load', getLocalStorage);
 
 // установка рандомного фона
 async function setBg() {
+    if(warning.classList.contains('opened')) 
+        warning.classList.remove('opened');
     const date = new Date();
     const body = document.querySelector('body');
     const hours = date.getHours();
@@ -144,7 +162,7 @@ async function setBg() {
     let timeOfDatText = timeOfDay == 0 ? 'night' : timeOfDay == 1 ? 'morning' : timeOfDay == 2 ? 'afternoon' : 'evening';
     let bgNum = randomNum.toString();
     bgNum = bgNum < 10 ? '0' + bgNum.toString() : bgNum.toString();
-    img.src = `https://raw.githubusercontent.com/rolling-scopes-school/stage1-tasks/assets/images/${timeOfDatText}/${bgNum}.jpg`;
+    img.src = `https://github.com/Asmat1k/stage1-tasks/blob/assets/images/${timeOfDatText}/${bgNum}.jpg?raw=true`;
     img.onload = () => {
         body.style.backgroundImage = `url(${img.src}`;
     }
@@ -152,12 +170,14 @@ async function setBg() {
 
 // unsplash api
 async function getLinkToImageUnsplash() {
-    let timeOfDay, timeOfDatText;
+    let timeOfDay, timeOfDayText;
     if(input.value=='') {
-        timeOfDay = getTimeOfDay; 
-        timeOfDatText = timeOfDay == 0 ? 'night' : timeOfDay == 1 ? 'morning' : timeOfDay == 2 ? 'afternoon' : 'evening';
-        input.value = timeOfDatText;
-    }
+        const date = new Date();
+        const hours = date.getHours();
+        timeOfDay = getTimeOfDay(hours); 
+        timeOfDayText = timeOfDay == 0 ? 'night' : timeOfDay == 1 ? 'morning' : timeOfDay == 2 ? 'afternoon' : 'evening';
+        input.value = timeOfDayText;
+    } 
     const url = `https://api.unsplash.com/photos/random?query=${input.value}&client_id=SdG4HTH1ewsx9-4zD5YvLB8GwQDtyvdC6zTVH5TnsIk`;
     const res = await fetch(url);
     const data = await res.json();
@@ -170,11 +190,12 @@ async function getLinkToImageUnsplash() {
 
 // flicker api
 async function getLinkToImageFlikcer() {
-    let timeOfDay, timeOfDatText;
+    let timeOfDay, timeOfDayText;
     if(input.value=='') {
-        timeOfDay = getTimeOfDay; 
-        timeOfDatText = timeOfDay == 0 ? 'night' : timeOfDay == 1 ? 'morning' : timeOfDay == 2 ? 'afternoon' : 'evening';
-        input.value = timeOfDatText;
+        const date = new Date();
+        const hours = date.getHours(); 
+        timeOfDayText = timeOfDay == 0 ? 'night' : timeOfDay == 1 ? 'morning' : timeOfDay == 2 ? 'afternoon' : 'evening';
+        input.value = timeOfDayText;
     } 
     const url = `https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=8d3623c6c03db0d807b8a25a073c131a&tags=${input.value}&extras=url_l&format=json&nojsoncallback=1`;
     try {
@@ -189,7 +210,6 @@ async function getLinkToImageFlikcer() {
         warning.classList.remove('opened');
     }
     catch(err) {
-        console.log('asda');
         warning.classList.add('opened');
     } 
 }
@@ -288,16 +308,35 @@ async function getQuotes() {
     const res = await fetch(quotes);
     const data = await res.json();
     const rand = (Math.floor(Math.random() * 19) + 0);
-    if(lang=='ru') {
+    if(localStorage.getItem('lang')==='ru'|| !localStorage.getItem('lang')) {
+        lastQuote = rand;
         quote.textContent = data[rand].textRu;
         author.textContent = data[rand].authorRu;
     }
-    else {
+    else if(localStorage.getItem('lang')==='en') {
+        lastQuote = rand;
         quote.textContent = data[rand].textEn;
         author.textContent = data[rand].authorEn;
     }
     refresh.addEventListener('click', getQuotes);
 }
+
+// перевод цитаты
+async function translateQuote() {
+    const author = document.querySelector('.author');
+    const quote = document.querySelector('.quote');
+    const quotes = 'data.json';
+    const res = await fetch(quotes);
+    const data = await res.json();
+    if(localStorage.getItem('lang')==='ru') {
+        quote.textContent = data[lastQuote].textRu;
+        author.textContent = data[lastQuote].authorRu;
+    }
+    else if(localStorage.getItem('lang')==='en') {
+        quote.textContent = data[lastQuote].textEn;
+        author.textContent = data[lastQuote].authorEn;
+    }
+} 
 
 // играть следующую песню
 function playNext() {
@@ -411,7 +450,7 @@ function unActiveList() {
     }
 }
 
-// прогрессБар двжиение
+// прогрессБар двжиение + время
 function updateProgress(event) {
     const progress = document.querySelector('.progress');
     const curT = document.querySelector('.currentTime');
@@ -420,7 +459,7 @@ function updateProgress(event) {
     curT.textContent = outTime(currentTime);
     dur.textContent = outTime(duration);
     if (dur.innerHTML === "NaN:NaN") {
-        dur.innerHTML = 'wait'
+        dur.innerHTML = '00:00'
     }
     const progressPercent = (currentTime / duration) * 100;
     progress.style.width = `${progressPercent}%`
@@ -472,23 +511,35 @@ function muteMusic() {
 }
 mute.addEventListener('click', muteMusic);
 
-// открытие настроек
+// открытие настроек 
 function openSettings() {
     const settingsBlock = document.querySelector('.settings-block');
-    const inp = document.querySelectorAll('.switch > input');
+    const inp = document.querySelectorAll('.hide-switch > .switch > input');
+    const inpLang = document.querySelectorAll('.language > .switch > input');
     const info = document.querySelector('.settings-block-info');    
-    const masNames = ['player', 'weather', 'time', 'date', 'greeting'];
-    const mas = [player, weather, time, date, greeting];
-    /* НАДО ПОФИКСИТЬ
-    for(let i=0; i<mas.length; i++) {
-        if(localStorage.getItem(masNames[i] == 'hide')) {
-            console.log('ad');
-            inp[i].checked = true;
+    const masNames = ['lang','player', 'weather', 'time', 'date', 'greeting', 'quotes'];
+    const length = masNames.length;
+    // нужен фикс
+    for(let i=0; i<length; i++) {
+        if(localStorage.getItem(masNames[i])) {
+            if(localStorage.getItem(masNames[i]) == 'hide') {
+                inp[i-1].checked = true;
+            }
+            else if(localStorage.getItem(masNames[i]) == 'show'){
+                inp[i-1].checked = false;
+            }
+            
+            if(localStorage.getItem(masNames[i]) == 'en') {
+                inpLang[i].checked = true;
+                changeLangSettings();
+            }
+            else if(localStorage.getItem(masNames[i]) == 'ru') {
+                inpLang[i].checked = false;
+                changeLangSettings();
+            }
+            
         }
-        else inp[i].checked = true;
-        console.log(localStorage.getItem(masNames[i]));
     }
-    */
     info.classList.toggle('opened');
     settingsBlock.classList.toggle('settings-block-open');
     settingsBlock.classList.toggle('opened');
@@ -497,8 +548,8 @@ settings.addEventListener('click', openSettings);
 
 // смена языка в настройках
 function changeLangSettings() {
-    const blockEngNames = ['Player','Weather','Time','Date','Greeting'];
-    const blockRuNames = ['Плеер', 'Погода', 'Время', 'Дата', 'Имя']
+    const blockEngNames = ['Player','Weather','Time','Date','Greeting','Quotes'];
+    const blockRuNames = ['Плеер', 'Погода', 'Время', 'Дата', 'Имя', 'Цитаты']
     const titleEng = ['Lang', 'Hide/Show', 'Change source'];
     const titleRu = ['Язык', 'Видимость', 'Смена фона'];
     const errorRu = 'Невозможно найти данный запрос';
@@ -542,8 +593,8 @@ function closeSettings() {
 
 // прятать блоки
 function hideBlock() {
-    const mas = [player, weather, time, date, greeting];
-    const masName = ['player', 'weather', 'time', 'date', 'greeting'];
+    const mas = [player, weather, time, date, greeting, quotes];
+    const masName = ['player', 'weather', 'time', 'date', 'greeting', 'quotes'];
     const switchButton = document.querySelectorAll('.hide-switch > .switch > .round');
     const length = switchButton.length;
     for(let i=0; i<length; i++) {
@@ -587,9 +638,6 @@ function changeBgSource() {
     })
 }
 
-
-
-
 closeSettings();
 changeBgSource();
 hideBlock();
@@ -600,5 +648,4 @@ activeList();
 playAudio();
 getQuotes();
 getWeather();
-//checkStatus();
 showTime();
