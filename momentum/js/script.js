@@ -142,12 +142,6 @@ function getLocalStorage() {
             lang = localStorage.getItem('lang');
         }
     }
-    /*
-    else {
-        setLocalStorageStatus('lang','ru');
-        lang = 'ru';
-    }
-    */
 }
 window.addEventListener('load', getLocalStorage);
 
@@ -569,7 +563,6 @@ function changeLangSettings() {
                 title[j].textContent = titleEng[j];
             if(length-i==1) {
                 warning.textContent = errorEng;
-                settings.textContent = 'Settings';
             }    
             blockNames[i].textContent = blockEngNames[i];
         }
@@ -580,7 +573,6 @@ function changeLangSettings() {
                 title[j].textContent = titleRu[j];
             if(length-i==1) {
                 warning.textContent = errorRu; 
-                settings.textContent = 'Настройки';  
             }
             blockNames[i].textContent = blockRuNames[i];
         }
