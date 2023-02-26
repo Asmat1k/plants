@@ -267,18 +267,23 @@ async function getWeather() {
     const temperature = document.querySelector('.temperature');
     const humidity = document.querySelector('.humidity');
     const wind = document.querySelector('.wind');
-    const url = `https://api.openweathermap.org/data/2.5/weather?q=${city.value}&lang=${lang}&appid=551cb3c09778bc804cc88404eee46c7e&units=metric`;
+    let langLoc;
+    if(!localStorage.getItem('lang'))
+        langLoc = 'ru';
+    else
+        langLoc = localStorage.getItem('lang');
+    const url = `https://api.openweathermap.org/data/2.5/weather?q=${city.value}&lang=${langLoc}&appid=551cb3c09778bc804cc88404eee46c7e&units=metric`;
     const res = await fetch(url);
     const data = await res.json();
     if(data.cod != 404) {
         weatherIcon.classList.add(`owf-${data.weather[0].id}`);
         temperature.textContent = `${Math.floor(data.main.temp)}°C`;
         weatherDescription.textContent = data.weather[0].description;
-        if(lang=='ru') {
+        if(localStorage.getItem('lang')==='ru' || !localStorage.getItem('lang')) {
             wind.textContent = `Скорость ветра: ${Math.floor(data.wind.speed)} м/с`;
             humidity.textContent = `Влажность: ${data.main.humidity}%`;
         }
-        else {
+        else if (localStorage.getItem('lang')==='en') {
             wind.textContent = `Wind speed: ${Math.floor(data.wind.speed)} м/с`;
             humidity.textContent = `Humidity: ${data.main.humidity}%`;
         }
@@ -286,11 +291,11 @@ async function getWeather() {
     else {
         weatherDescription.textContent = ``;
         humidity.textContent = ``;
-        if(lang=='ru') {
+        if(localStorage.getItem('lang')==='ru' || !localStorage.getItem('lang')) {
             temperature.textContent = `Город введен неверно`;
             wind.textContent = `Попробуйте ещё раз`;
         }
-        else {
+        else if(localStorage.getItem('lang')==='en') {
             temperature.textContent = `Wrong city`;
             wind.textContent = `Try again`;
         }
