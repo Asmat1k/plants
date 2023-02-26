@@ -131,7 +131,7 @@ body {
 
 .settings-block {
   position: absolute;
-  bottom: 600px;
+  bottom: 1500px;
   color: black;
   min-width: 500px;
   min-height: 200px;
@@ -587,7 +587,30 @@ input:checked + .slider:before {
   min-height: 20px;
 }
 
+@media (max-width: 2040px) {
+  .settings-block-open {
+    bottom: 410px;
+  }
+}
+
+@media (max-width: 1680px) {
+  .settings-block-open {
+    bottom: 270px;
+  }
+}
+
+
+@media (max-width: 1440px) {
+  .settings-block-open {
+    bottom: 310px;
+  }
+}
+
 @media (max-width: 768px) {
+  .settings-block-open {
+    bottom: 210px;
+  }
+
   .time {
     min-height: 80px;
     font-size: 72px;    
@@ -605,9 +628,5 @@ input:checked + .slider:before {
   .name {
     font-size: 32px;
     padding: 5px;
-  }
-
-  .settings-block-open {
-    bottom: 210px;
   }
 }
