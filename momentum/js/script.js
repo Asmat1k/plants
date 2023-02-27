@@ -251,7 +251,7 @@ async function getWeather() {
         else {
             if(localStorage.getItem('lang')=='en')
                 city.value = 'Minsk';
-            if(localStorage.getItem('lang')=='ru')
+            if(localStorage.getItem('lang')=='ru' || !localStorage.getItem('lang'))
                 city.value = 'Минск';
         }      
         getWeather();
