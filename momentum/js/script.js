@@ -45,6 +45,7 @@ function changeLanguage() {
         setLocalStorageStatus('lang','ru');
     }
     showTime();
+    translateDefCity();
     translateQuote();
     getWeather();
     changeLangSettings()
@@ -241,18 +242,18 @@ function slideImg() {
 
 // получение погды
 async function getWeather() {
-    // загрузка города в лс
     const city = document.querySelector('.city');
-    function setLocalStorage() {
-        localStorage.setItem('city', city.value);
-    }
-    window.addEventListener('beforeunload', setLocalStorage);
     // загрузка города из лс
     function getLocalStorage() {
+        console.log(localStorage.getItem('lang'));
         if(localStorage.getItem('city'))
             city.value = localStorage.getItem('city');
-        else 
-            city.value = 'Минск';
+        else {
+            if(localStorage.getItem('lang')=='en')
+                city.value = 'Minsk';
+            if(localStorage.getItem('lang')=='ru')
+                city.value = 'Минск';
+        }      
         getWeather();
     }
     window.addEventListener('load', getLocalStorage);
@@ -296,6 +297,16 @@ async function getWeather() {
         
     }
     city.addEventListener('change', getWeather);
+}
+
+function translateDefCity() {
+    const city = document.querySelector('.city');
+    if(city.value === 'Minsk' || city.value === 'Минск') {
+        if(localStorage.getItem('lang')=='en')
+                    city.value = 'Minsk';
+        else if(localStorage.getItem('lang')=='ru')
+                    city.value = 'Минск';
+    }
 }
 
 // цитаты
@@ -383,17 +394,23 @@ function addPlayList() {
 // клик на список
 function activeList() {
     const buttons = document.querySelectorAll('.wrapper > button');
+    const li = document.querySelectorAll('.play-item');
+    const playButton = document.querySelector('.play');
     const butLength = buttons.length;
     for(let i=0; i<butLength; i++) {
         buttons[i].addEventListener('click', function() {
             if(buttons[i].classList.contains('pause')) {
                 isPlay = false;
+                playButton.classList.remove('pause');
+                li[i].classList.remove('playing');
                 buttons[i].classList.remove('pause');
                 audio.pause();
             }
             else {
                 isPlay = true;
                 unActiveList();
+                playButton.classList.add('pause');
+                li[i].classList.add('playing');
                 buttons[i].classList.add('pause');
                 playNum = i;
                 audio.src = playList[playNum].src;
@@ -409,6 +426,7 @@ function playAudio() {
     const currentMusic = document.querySelector('.current-music')
     const playButton = document.querySelector('.play');
     const buttons = document.querySelectorAll('.wrapper > button');
+    const li = document.querySelectorAll('.play-item');
     currentMusic.textContent = playList[playNum].title;
     audio.src = playList[playNum].src;
     // листание кнопками
@@ -417,6 +435,7 @@ function playAudio() {
         audio.play();
         unActiveList();
         //li[playNum].classList.toggle('chosen');
+        li[playNum].classList.add('playing');
         playButton.classList.add('pause');
         buttons[playNum].classList.add('pause');
     }
@@ -427,12 +446,14 @@ function playAudio() {
                 isPlay = true;
                 audio.currentTime = 0;
                 audio.play();
+                li[playNum].classList.add('playing');
                 buttons[playNum].classList.add('pause');
                 playButton.classList.add('pause');
             }
             else if(isPlay) {
                 isPlay = false;
                 audio.pause();
+                li[playNum].classList.remove('playing');
                 buttons[playNum].classList.remove('pause');
                 playButton.classList.remove('pause');
             }
@@ -443,9 +464,11 @@ function playAudio() {
 // деактивировать список
 function unActiveList() {
     const buttons = document.querySelectorAll('.wrapper > button');
+    const li = document.querySelectorAll('.play-item');
     const butLength = buttons.length;
     for(let j=0; j<butLength; j++) {
         buttons[j].classList.remove('pause');
+        li[j].classList.remove('playing');
     }
 }
 
@@ -582,6 +605,7 @@ function changeLangSettings() {
 // закрыть настройки
 function closeSettings() {
     const close = document.querySelector('.settings-block__close');
+    console.log('asds');
     const settings = document.querySelector('.settings-block');
     close.addEventListener('click', function() {
         settings.classList.remove('settings-block-open');

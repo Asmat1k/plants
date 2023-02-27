@@ -116,6 +116,11 @@ body {
 /* настройки */
 
 .settings {
+  cursor: pointer;
+  position: absolute;
+  z-index: 1;
+  left: 1%;
+  bottom: 2%;
   color: white;
   min-width: 25px;
   min-height: 25px;
@@ -130,22 +135,25 @@ body {
 }
 
 .settings-block {
+  z-index: 1;
   position: absolute;
-  bottom: 1500px;
+  bottom: 1%;
+  left: -100%;
   color: black;
   min-width: 500px;
-  min-height: 200px;
+  max-height: 280px;
   background-color: white;
   border-radius: 20px;
-  transition: .25s;
+  transition: .9s;
 }
 
 .settings-block-open {
-  bottom: 275px;
+  left: 1%;
 }
 
 .settings-block-info {
   position: relative;
+  z-index: 1;
   display: flex;
   flex-direction: column;
   max-width: 400px;
@@ -161,7 +169,7 @@ body {
 
 .opacity {
   opacity: 0;
-  transition: .25s;
+  transition: .5s;
 }
 
 .block {
@@ -346,6 +354,10 @@ input:checked + .slider:before {
   color: #C5B358;
 }
 
+.player {
+  transition: .5s;
+}
+
 .player-icon,
 .slider-icon,
 .change-quote {
@@ -449,6 +461,7 @@ input:checked + .slider:before {
   width: 180px;
   min-height: 180px;  
   text-align: left;
+  transition: .5s;
 }
 
 .weather-error {
@@ -487,7 +500,6 @@ input:checked + .slider:before {
 }
 
 .main {
-  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -521,12 +533,14 @@ input:checked + .slider:before {
   font-family: 'Arial-MT';
   font-size: 100px;
   letter-spacing: -4px;  
+  transition: .5s;
 }
 
 .date {
   min-height: 28px;
   font-size: 24px;
   margin-bottom: 20px;
+  transition: .5s;
 }
 
 .greeting-container {
@@ -537,6 +551,7 @@ input:checked + .slider:before {
   min-height: 48px;
   width: 100vw;
   font-size: 40px;
+  transition: .5s;
 }
 
 .greeting {
@@ -563,6 +578,7 @@ input:checked + .slider:before {
 }
 
 .footer {
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -571,6 +587,7 @@ input:checked + .slider:before {
   height: 30vh;
   min-height: 160px;  
   padding: 20px;
+  transition: .5s;
 }
 
 
@@ -587,24 +604,11 @@ input:checked + .slider:before {
   min-height: 20px;
 }
 
-@media (max-width: 2040px) {
-  .settings-block-open {
-    bottom: 410px;
-  }
+.playing {
+  transform: scale(1.1);
+  transition: .25s;
 }
 
-@media (max-width: 1680px) {
-  .settings-block-open {
-    bottom: 270px;
-  }
-}
-
-
-@media (max-width: 1440px) {
-  .settings-block-open {
-    bottom: 310px;
-  }
-}
 
 @media (max-width: 768px) {
   .settings-block-open {
