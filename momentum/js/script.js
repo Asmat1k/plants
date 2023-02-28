@@ -177,7 +177,6 @@ async function getLinkToImageUnsplash() {
     const res = await fetch(url);
     const data = await res.json();
     img.src = data.urls.regular;
-    console.log(img.src);
     img.onload = () => {
         document.body.style.backgroundImage = `url(${img.src})`;
     }
@@ -243,9 +242,12 @@ function slideImg() {
 // получение погды
 async function getWeather() {
     const city = document.querySelector('.city');
+    function setLocalStorage() {
+        localStorage.setItem('city', city.value);
+    }
+    window.addEventListener('beforeunload', setLocalStorage);
     // загрузка города из лс
     function getLocalStorage() {
-        console.log(localStorage.getItem('lang'));
         if(localStorage.getItem('city'))
             city.value = localStorage.getItem('city');
         else {
@@ -299,6 +301,7 @@ async function getWeather() {
     city.addEventListener('change', getWeather);
 }
 
+// перевод города по умолчанию
 function translateDefCity() {
     const city = document.querySelector('.city');
     if(city.value === 'Minsk' || city.value === 'Минск') {
@@ -541,7 +544,6 @@ function openSettings() {
     const info = document.querySelector('.settings-block-info');    
     const masNames = ['lang','player', 'weather', 'time', 'date', 'greeting', 'quotes'];
     const length = masNames.length;
-    // нужен фикс
     for(let i=0; i<length; i++) {
         if(localStorage.getItem(masNames[i])) {
             if(localStorage.getItem(masNames[i]) == 'hide') {
@@ -576,8 +578,11 @@ function changeLangSettings() {
     const titleRu = ['Язык', 'Видимость', 'Смена фона'];
     const errorRu = 'Невозможно найти данный запрос';
     const errorEng = 'Cant find your request';
+    const helpRu = 'нажмите Enter для обновления';
+    const helpEng = 'press Enter to update'
     const blockNames = document.querySelectorAll('.settings-block__title');
     const title = document.querySelectorAll('.title');
+    const help = document.querySelector('.help');
     const titleLength = titleRu.length;
     const length = blockNames.length;
     if(lang=='en') {
@@ -586,6 +591,7 @@ function changeLangSettings() {
                 title[j].textContent = titleEng[j];
             if(length-i==1) {
                 warning.textContent = errorEng;
+                help.textContent = helpEng;
             }    
             blockNames[i].textContent = blockEngNames[i];
         }
@@ -596,6 +602,7 @@ function changeLangSettings() {
                 title[j].textContent = titleRu[j];
             if(length-i==1) {
                 warning.textContent = errorRu; 
+                help.textContent = helpRu;
             }
             blockNames[i].textContent = blockRuNames[i];
         }
@@ -605,7 +612,6 @@ function changeLangSettings() {
 // закрыть настройки
 function closeSettings() {
     const close = document.querySelector('.settings-block__close');
-    console.log('asds');
     const settings = document.querySelector('.settings-block');
     close.addEventListener('click', function() {
         settings.classList.remove('settings-block-open');
@@ -634,9 +640,8 @@ function hideBlock() {
 
 // смена фона
 function changeBgSource() {
-    const update = document.querySelector('.update');
     const buttons = document.querySelectorAll('.chage-api__button');
-    const input = document.querySelector('.settings-block__input');
+    const help = document.querySelector('.help');
     const length = buttons.length;
     buttons.forEach((button) => {
         button.addEventListener('click', function() {
@@ -647,17 +652,32 @@ function changeBgSource() {
             source = button.textContent;
             if(button.classList.contains('api') && button.classList.contains('active-button')) {
                 input.classList.add('active-input');
+                help.classList.add('opened');
             }
             else {
                 input.classList.remove('active-input');
+                help.classList.remove('opened');
             }
             if(button.textContent == 'Flickr')
                 getLinkToImageFlikcer();
             else if(button.textContent == 'Unsplash')
-                getLinkToImageFlikcer();
+                getLinkToImageUnsplash();
         })
     })
 }
+
+// подтверждение ввода
+function updateBgInput(event) {
+    const flickr = document.querySelector('.flickr');
+    const unsplash = document.querySelector('.unsplash');
+    if(event.code === 'Enter') {
+        if(flickr.classList.contains('active-button'))
+                getLinkToImageFlikcer();
+        else if(unsplash.classList.contains('active-button'))
+                getLinkToImageUnsplash();
+    }
+}
+input.addEventListener('keypress', updateBgInput);
 
 closeSettings();
 changeBgSource();

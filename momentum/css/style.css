@@ -271,6 +271,13 @@ body {
   font-size: 16px;
 }
 
+.help {
+  display: none;
+  font-size: 10px;
+  color: grey;
+  opacity: 0.8;
+}
+
 .switch {
   position: relative;
   display: inline-block;
