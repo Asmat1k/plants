@@ -1,9 +1,9 @@
 # PLANTS
-### Макет
-- [Макет для верстки](https://www.figma.com/file/ntVt8IwlwzfVFMBuVVAze8/Plants?node-id=0%3A1)
-### Технологии
+### Layout
+- [Figma](https://www.figma.com/file/ntVt8IwlwzfVFMBuVVAze8/Plants?node-id=0%3A1)
+### Stack
 - HTML
 - CSS
 - JS
-### Деплой
+### Deploy
 - [Plants](https://asmat1k.github.io/plants/plants/)
